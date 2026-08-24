@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Humble Studio Tool</title>
 
     <style>
 
-        /* =====================================================
+        /* =========================================================
            RESET
-        ===================================================== */
+        ========================================================= */
 
         * {
             box-sizing: border-box;
@@ -27,55 +29,80 @@
             min-height: 100vh;
 
             font-family:
-                Arial Black,
-                Impact,
                 Arial,
                 Helvetica,
                 sans-serif;
 
-            background: #fff500;
+            background: #fff000;
 
             color: #000;
 
             overflow-x: hidden;
         }
 
-
-        /* =====================================================
-           SELECTION
-        ===================================================== */
-
-        ::selection {
-            background: #ff00e6;
-            color: #fff;
+        a {
+            color: inherit;
         }
 
 
-        /* =====================================================
-           PAGE
-        ===================================================== */
+        /* =========================================================
+           ANIMATED BACKGROUND
+        ========================================================= */
 
-        .page {
-            position: relative;
+        body::before {
+            content: "";
 
-            min-height: 100vh;
+            position: fixed;
 
-            overflow: hidden;
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: -10;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 0, 230, 0.18),
+                    transparent 18%
+                ),
+                radial-gradient(
+                    circle at 85% 35%,
+                    rgba(0, 255, 255, 0.18),
+                    transparent 20%
+                ),
+                radial-gradient(
+                    circle at 50% 90%,
+                    rgba(0, 255, 60, 0.15),
+                    transparent 22%
+                );
+
+            animation: backgroundMove 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundMove {
+
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.12);
+            }
         }
 
 
-        /* =====================================================
-           TOP NAV
-        ===================================================== */
+        /* =========================================================
+           TOP HEADER
+        ========================================================= */
 
         .topbar {
-            width: 100%;
 
-            min-height: 72px;
+            min-height: 58px;
 
-            background: #fffbdc;
+            background: #fffde9;
 
-            border-bottom: 4px solid #000;
+            border-bottom: 3px solid #000;
 
             display: flex;
 
@@ -83,15 +110,17 @@
 
             justify-content: space-between;
 
-            padding: 14px 28px;
+            padding: 10px 28px;
+
+            gap: 20px;
 
             position: relative;
 
             z-index: 20;
         }
 
-
         .brand {
+
             display: flex;
 
             align-items: center;
@@ -105,85 +134,80 @@
             text-transform: uppercase;
         }
 
+        .brand-mark {
 
-        .brand-dot {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
 
             background: #ff00e6;
 
             border: 3px solid #000;
 
+            transform: rotate(-5deg);
+
             box-shadow: 3px 3px 0 #000;
 
-            transform: rotate(-8deg);
-
-            animation: jitter 1.8s infinite;
+            flex-shrink: 0;
         }
 
-
-        .nav-status {
-            padding: 7px 12px;
+        .version-badge {
 
             background: #00eaff;
 
             border: 3px solid #000;
 
-            box-shadow: 3px 3px 0 #000;
+            padding: 7px 13px;
 
-            font-size: 12px;
+            font-size: 13px;
 
             font-weight: 1000;
+
+            box-shadow: 4px 4px 0 #000;
+
+            transform: rotate(2deg);
         }
 
 
-        /* =====================================================
+        /* =========================================================
            MARQUEE
-        ===================================================== */
+        ========================================================= */
 
         .marquee {
+
             width: 100%;
 
             overflow: hidden;
 
             background: #000;
 
-            color: #fff500;
+            color: #fff000;
 
-            border-bottom: 4px solid #000;
+            border-bottom: 3px solid #000;
+
+            padding: 9px 0;
 
             white-space: nowrap;
-
-            padding: 10px 0;
-
-            position: relative;
-
-            z-index: 15;
         }
 
-
         .marquee-track {
+
             display: inline-flex;
 
             width: max-content;
 
-            animation:
-                marquee 18s linear infinite;
+            animation: marquee 18s linear infinite;
         }
 
+        .marquee-content {
 
-        .marquee span {
-            display: inline-block;
-
-            padding-right: 40px;
-
-            font-size: 16px;
+            font-size: 15px;
 
             font-weight: 1000;
 
             letter-spacing: 1px;
-        }
 
+            padding-right: 35px;
+        }
 
         @keyframes marquee {
 
@@ -194,730 +218,323 @@
             to {
                 transform: translateX(-50%);
             }
-
         }
 
 
-        /* =====================================================
-           HERO
-        ===================================================== */
+        /* =========================================================
+           MAIN
+        ========================================================= */
 
-        .hero {
-            max-width: 1050px;
+        main {
+
+            width: 100%;
+
+            max-width: 1100px;
 
             margin: 0 auto;
 
-            padding:
-                70px 25px 40px;
-
-            position: relative;
-
-            text-align: left;
+            padding: 26px 24px 60px;
         }
 
 
-        /* =====================================================
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+
+            position: relative;
+
+            max-width: 900px;
+
+            margin: 0 auto;
+
+            padding: 10px 10px 24px;
+        }
+
+
+        /* =========================================================
            FLOATING STICKERS
-        ===================================================== */
+        ========================================================= */
 
         .sticker {
-            position: absolute;
 
-            font-size: 55px;
+            position: absolute;
 
             pointer-events: none;
 
             user-select: none;
 
-            z-index: 2;
+            z-index: 1;
 
             animation:
-                float 3.5s ease-in-out infinite;
+                floatSticker 3s ease-in-out infinite alternate;
         }
 
+        .sticker.fire {
 
-        .sticker.one {
-            top: 40px;
-            left: 20px;
+            top: 0;
 
-            transform: rotate(-15deg);
+            left: -25px;
+
+            font-size: 64px;
+
+            transform: rotate(-12deg);
         }
 
+        .sticker.star {
 
-        .sticker.two {
-            top: 120px;
-            right: 20px;
+            top: 65px;
 
-            transform: rotate(13deg);
+            right: -15px;
 
-            animation-delay: .7s;
+            font-size: 52px;
+
+            transform: rotate(8deg);
+
+            animation-delay: .6s;
         }
 
+        .sticker.eyes {
 
-        .sticker.three {
-            bottom: 10px;
-            left: 60px;
+            bottom: 105px;
 
-            transform: rotate(12deg);
+            left: 15px;
 
-            animation-delay: 1.2s;
+            font-size: 42px;
+
+            transform: rotate(-8deg);
+
+            animation-delay: 1s;
         }
 
+        .sticker.disc {
 
-        .sticker.four {
-            bottom: 20px;
-            right: 50px;
+            bottom: 90px;
 
-            transform: rotate(-15deg);
+            right: 35px;
 
-            animation-delay: .4s;
+            font-size: 44px;
+
+            animation-delay: 1.4s;
         }
 
+        @keyframes floatSticker {
 
-        @keyframes float {
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(-5deg);
+            }
 
-            0%,
             100% {
-                translate: 0 0;
+                transform:
+                    translateY(-12px)
+                    rotate(6deg);
             }
-
-            50% {
-                translate: 0 -15px;
-            }
-
         }
 
 
-        /* =====================================================
+        /* =========================================================
            LOGO
-        ===================================================== */
+        ========================================================= */
 
         .logo-wrap {
-            width: 125px;
-            height: 125px;
 
-            background: #fff;
+            width: 105px;
 
-            border: 4px solid #000;
+            height: 105px;
 
-            box-shadow:
-                8px 8px 0 #000;
+            background: #000;
 
-            transform:
-                rotate(-5deg);
+            border: 3px solid #000;
 
-            margin-bottom: 35px;
+            box-shadow: 6px 6px 0 #000;
+
+            margin: 4px 0 22px;
+
+            transform: rotate(-4deg);
 
             position: relative;
 
             z-index: 5;
 
             animation:
-                logoJitter 3s infinite;
+                logoJitter 5s infinite;
         }
 
+        .logo-wrap img {
 
-        .logo {
             width: 100%;
+
             height: 100%;
 
             object-fit: cover;
 
             display: block;
-        }
 
+            border: 3px solid #fff;
+
+        }
 
         @keyframes logoJitter {
 
             0%,
-            90%,
+            92%,
             100% {
-                transform: rotate(-5deg);
-            }
-
-            92% {
-                transform:
-                    rotate(-2deg)
-                    translate(2px, -2px);
-            }
-
-            94% {
-                transform:
-                    rotate(-7deg)
-                    translate(-2px, 2px);
-            }
-
-            96% {
                 transform: rotate(-4deg);
             }
 
+            94% {
+                transform: rotate(-2deg) translate(2px, -1px);
+            }
+
+            96% {
+                transform: rotate(-6deg) translate(-2px, 1px);
+            }
         }
 
 
-        /* =====================================================
-           MAIN TITLE
-        ===================================================== */
+        /* =========================================================
+           PINK BADGE
+        ========================================================= */
 
-        .hero-title {
+        .hero-badge {
+
+            display: inline-block;
+
+            background: #ff00e6;
+
+            color: #fff;
+
+            border: 3px solid #000;
+
+            box-shadow: 5px 5px 0 #000;
+
+            padding: 10px 16px;
+
+            font-size: 14px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            transform: rotate(-1.5deg);
+
+            margin-bottom: 26px;
+
             position: relative;
 
             z-index: 5;
 
-            max-width: 850px;
+            animation: badgeJitter 4s infinite;
+        }
 
-            font-size:
-                clamp(55px, 10vw, 120px);
+        @keyframes badgeJitter {
 
-            line-height: .82;
+            0%,
+            90%,
+            100% {
+                transform: rotate(-1.5deg);
+            }
+
+            92% {
+                transform: rotate(1deg);
+            }
+
+            94% {
+                transform: rotate(-2deg);
+            }
+        }
+
+
+        /* =========================================================
+           MAIN TITLE
+        ========================================================= */
+
+        .main-title {
+
+            position: relative;
+
+            z-index: 5;
+
+            font-size: clamp(
+                64px,
+                10vw,
+                125px
+            );
+
+            line-height: .80;
 
             letter-spacing: -7px;
 
+            font-weight: 1000;
+
             text-transform: uppercase;
 
-            margin-bottom: 35px;
+            max-width: 700px;
+
+            margin-bottom: 25px;
+
+            color: #000;
 
             text-shadow:
-                8px 8px 0 #ff00e6;
+                7px 7px 0 #ff00e6;
 
-            animation:
-                titleJitter 4s infinite;
+            animation: titleJitter 5s infinite;
         }
-
 
         @keyframes titleJitter {
 
             0%,
-            94%,
+            92%,
             100% {
-                transform: translate(0);
+                transform: translate(0, 0);
+            }
+
+            93% {
+                transform: translate(-2px, 1px);
+            }
+
+            94% {
+                transform: translate(3px, -1px);
             }
 
             95% {
-                transform:
-                    translate(-3px, 2px)
-                    skewX(-2deg);
+                transform: translate(-1px, 2px);
             }
-
-            96% {
-                transform:
-                    translate(3px, -1px)
-                    skewX(2deg);
-            }
-
-            97% {
-                transform: translate(0);
-            }
-
         }
 
 
-        /* =====================================================
-           SUBTITLE
-        ===================================================== */
+        /* =========================================================
+           DESCRIPTION
+        ========================================================= */
 
-        .hero-description {
+        .description {
+
+            position: relative;
+
+            z-index: 5;
+
             max-width: 650px;
-
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
 
             font-size: 19px;
 
-            font-weight: 800;
-
-            line-height: 1.5;
-
-            margin-bottom: 35px;
-
-            position: relative;
-
-            z-index: 5;
-        }
-
-
-        /* =====================================================
-           CHAOS TAG
-        ===================================================== */
-
-        .chaos-tag {
-            display: inline-block;
-
-            padding: 10px 16px;
-
-            background: #ff00e6;
-
-            color: #fff;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                6px 6px 0 #000;
-
-            transform:
-                rotate(-2deg);
-
-            font-size: 14px;
-
-            font-weight: 1000;
-
-            margin-bottom: 35px;
-
-            position: relative;
-
-            z-index: 5;
-        }
-
-
-        /* =====================================================
-           DOWNLOAD SECTION
-        ===================================================== */
-
-        .download-section {
-            max-width: 1000px;
-
-            margin: 20px auto 0;
-
-            padding: 0 25px 60px;
-
-            position: relative;
-        }
-
-
-        /* =====================================================
-           SECTION HEADING
-        ===================================================== */
-
-        .section-heading {
-            font-size: 30px;
-
-            font-weight: 1000;
-
-            text-transform: uppercase;
-
-            margin-bottom: 25px;
-
-            display: inline-block;
-
-            padding: 7px 12px;
-
-            background: #fff;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                6px 6px 0 #000;
-
-            transform:
-                rotate(-1deg);
-        }
-
-
-        /* =====================================================
-           RELEASE CARD
-        ===================================================== */
-
-        .release-card {
-            background: #ff00e6;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                9px 9px 0 #000;
-
-            padding: 30px;
-
-            transform:
-                rotate(-1deg);
-
-            position: relative;
-
-            overflow: hidden;
-
-            margin-bottom: 45px;
-        }
-
-
-        .release-card::after {
-            content: "LATEST";
-
-            position: absolute;
-
-            right: -35px;
-            top: 20px;
-
-            padding: 9px 45px;
-
-            background: #00ff38;
-
-            border: 3px solid #000;
-
-            transform: rotate(35deg);
-
-            font-size: 13px;
-
-            font-weight: 1000;
-        }
-
-
-        .release-label {
-            font-size: 14px;
-
-            color: #fff;
-
-            margin-bottom: 12px;
-
-            font-weight: 1000;
-        }
-
-
-        .release-title {
-            font-size:
-                clamp(35px, 6vw, 65px);
-
-            line-height: .9;
-
-            text-transform: uppercase;
-
-            color: #fff;
-
-            text-shadow:
-                4px 4px 0 #00eaff;
-
-            margin-bottom: 20px;
-        }
-
-
-        .release-info {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
+            line-height: 1.4;
 
             font-weight: 900;
 
-            font-size: 17px;
-
-            color: #fff;
+            margin-bottom: 24px;
         }
 
 
-        /* =====================================================
-           DOWNLOAD GRID
-        ===================================================== */
+        /* =========================================================
+           GET TOOL BUTTON
+        ========================================================= */
 
-        .download-grid {
-            display: grid;
+        .get-tool {
 
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 22px;
-
-            margin-top: 25px;
-        }
-
-
-        /* =====================================================
-           DOWNLOAD BOX
-        ===================================================== */
-
-        .download-box {
-            padding: 30px 25px;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                7px 7px 0 #000;
-
-            text-decoration: none;
-
-            color: #000;
-
-            display: flex;
-
-            flex-direction: column;
-
-            align-items: flex-start;
-
-            min-height: 230px;
-
-            transition:
-                transform .15s ease,
-                box-shadow .15s ease;
-
-            position: relative;
-        }
-
-
-        .download-box:hover {
-            transform:
-                translate(4px, 4px)
-                rotate(0deg);
-
-            box-shadow:
-                3px 3px 0 #000;
-        }
-
-
-        .download-box.windows {
-            background: #00eaff;
-
-            transform:
-                rotate(1.5deg);
-        }
-
-
-        .download-box.mac {
-            background: #00ff38;
-
-            transform:
-                rotate(-1.5deg);
-        }
-
-
-        .download-icon {
-            font-size: 55px;
-
-            margin-bottom: 15px;
-        }
-
-
-        .download-name {
-            font-size: 28px;
-
-            font-weight: 1000;
-
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
-        }
-
-
-        .download-description {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            font-size: 14px;
-
-            font-weight: 800;
-
-            line-height: 1.5;
-
-            margin-bottom: auto;
-        }
-
-
-        .download-button {
-            margin-top: 22px;
-
-            background: #000;
-
-            color: #fff;
-
-            padding: 12px 17px;
-
-            font-size: 13px;
-
-            font-weight: 1000;
-
-            border: 0;
-        }
-
-
-        /* =====================================================
-           FEATURES
-        ===================================================== */
-
-        .features {
-            margin-top: 60px;
-        }
-
-
-        .feature-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 18px;
-        }
-
-
-        .feature {
-            min-height: 150px;
-
-            padding: 22px;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                6px 6px 0 #000;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: space-between;
-
-            transition:
-                transform .15s ease;
-        }
-
-
-        .feature:hover {
-            transform:
-                translateY(-7px)
-                rotate(-2deg);
-        }
-
-
-        .feature:nth-child(1) {
-            background: #00eaff;
-
-            transform: rotate(-1deg);
-        }
-
-
-        .feature:nth-child(2) {
-            background: #ff7b00;
-
-            transform: rotate(2deg);
-        }
-
-
-        .feature:nth-child(3) {
-            background: #00ff38;
-
-            transform: rotate(-1deg);
-        }
-
-
-        .feature:nth-child(4) {
-            background: #ff5ac8;
-
-            transform: rotate(2deg);
-        }
-
-
-        .feature:nth-child(5) {
-            background: #fff;
-
-            transform: rotate(-2deg);
-        }
-
-
-        .feature:nth-child(6) {
-            background: #9b5cff;
-
-            transform: rotate(1deg);
-        }
-
-
-        .feature-icon {
-            font-size: 32px;
-
-            margin-bottom: 15px;
-        }
-
-
-        .feature-title {
-            font-size: 17px;
-
-            font-weight: 1000;
-
-            text-transform: uppercase;
-        }
-
-
-        /* =====================================================
-           REQUIREMENTS
-        ===================================================== */
-
-        .requirements {
-            margin-top: 55px;
-
-            padding: 25px;
-
-            background: #000;
-
-            color: #fff500;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                7px 7px 0 #ff00e6;
-
-            transform:
-                rotate(.5deg);
-        }
-
-
-        .requirements h3 {
-            font-size: 22px;
-
-            margin-bottom: 15px;
-
-            text-transform: uppercase;
-        }
-
-
-        .requirements p {
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-
-            font-weight: 800;
-        }
-
-
-        /* =====================================================
-           SOCIAL
-        ===================================================== */
-
-        .social-section {
-            max-width: 1000px;
-
-            margin: 40px auto 0;
-
-            padding: 30px 25px 65px;
-
-            text-align: center;
-        }
-
-
-        .social-heading {
-            font-size: 32px;
-
-            text-transform: uppercase;
-
-            margin-bottom: 25px;
-
-            font-weight: 1000;
-        }
-
-
-        .social-grid {
-            display: flex;
-
-            justify-content: center;
-
-            gap: 20px;
-
-            flex-wrap: wrap;
-        }
-
-
-        .social {
-            display: flex;
+            display: inline-flex;
 
             align-items: center;
 
@@ -925,20 +542,181 @@
 
             gap: 12px;
 
-            min-width: 210px;
-
-            padding: 16px 22px;
-
-            border: 4px solid #000;
-
-            box-shadow:
-                6px 6px 0 #000;
-
-            text-decoration: none;
+            background: #fff;
 
             color: #000;
 
-            font-size: 15px;
+            border: 4px solid #000;
+
+            box-shadow: 7px 7px 0 #000;
+
+            padding: 15px 28px;
+
+            font-size: 22px;
+
+            font-weight: 1000;
+
+            text-decoration: none;
+
+            text-transform: uppercase;
+
+            position: relative;
+
+            z-index: 5;
+
+            transform: rotate(-1deg);
+
+            transition:
+                transform .12s ease,
+                box-shadow .12s ease;
+        }
+
+        .get-tool:hover {
+
+            transform:
+                translate(-3px, -3px)
+                rotate(1deg);
+
+            box-shadow:
+                10px 10px 0 #000;
+        }
+
+        .get-tool:active {
+
+            transform:
+                translate(5px, 5px);
+
+            box-shadow:
+                2px 2px 0 #000;
+        }
+
+
+        /* =========================================================
+           SECTION
+        ========================================================= */
+
+        .section {
+
+            margin-top: 38px;
+
+            position: relative;
+        }
+
+        .section-title {
+
+            display: inline-block;
+
+            background: #000;
+
+            color: #fff000;
+
+            border: 3px solid #000;
+
+            padding: 8px 14px;
+
+            font-size: 23px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+
+            transform: rotate(-1deg);
+        }
+
+
+        /* =========================================================
+           DOWNLOAD CARD
+        ========================================================= */
+
+        .download-card {
+
+            background: #ff00e6;
+
+            border: 4px solid #000;
+
+            box-shadow: 8px 8px 0 #000;
+
+            padding: 24px;
+
+            transform: rotate(.4deg);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .download-card::after {
+
+            content: "DOWNLOAD";
+
+            position: absolute;
+
+            right: -30px;
+
+            top: 15px;
+
+            background: #00ff48;
+
+            color: #000;
+
+            border: 3px solid #000;
+
+            padding: 7px 25px;
+
+            font-size: 12px;
+
+            font-weight: 1000;
+
+            transform: rotate(8deg);
+        }
+
+        .version {
+
+            font-size: 16px;
+
+            font-weight: 1000;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================================================
+           DOWNLOAD BUTTONS
+        ========================================================= */
+
+        .downloads {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+        }
+
+        .download {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 58px;
+
+            background: #fff;
+
+            color: #000;
+
+            border: 4px solid #000;
+
+            box-shadow: 5px 5px 0 #000;
+
+            text-decoration: none;
+
+            font-size: 16px;
 
             font-weight: 1000;
 
@@ -947,52 +725,259 @@
                 box-shadow .12s ease;
         }
 
+        .download:hover {
 
-        .social:hover {
+            transform:
+                translate(-3px, -3px);
+
+            box-shadow:
+                8px 8px 0 #000;
+        }
+
+        .download:active {
+
             transform:
                 translate(4px, 4px);
 
             box-shadow:
-                2px 2px 0 #000;
+                1px 1px 0 #000;
         }
 
 
-        .social.instagram {
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff00e6,
-                    #ff004f,
-                    #ff9500
+        /* =========================================================
+           FEATURES
+        ========================================================= */
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .feature {
+
+            min-height: 150px;
+
+            border: 4px solid #000;
+
+            box-shadow: 6px 6px 0 #000;
+
+            padding: 20px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            font-weight: 1000;
+
+            transform:
+                rotate(
+                    var(--rotation)
                 );
+
+            transition:
+                transform .2s ease;
         }
 
+        .feature:hover {
 
-        .social.youtube {
-            background: #ff3030;
+            transform:
+                translateY(-6px)
+                rotate(0deg);
+        }
+
+        .feature:nth-child(1) {
+
+            background: #00eaff;
+
+            --rotation: -1deg;
+        }
+
+        .feature:nth-child(2) {
+
+            background: #ff6565;
+
+            --rotation: 1.5deg;
+        }
+
+        .feature:nth-child(3) {
+
+            background: #00ff32;
+
+            --rotation: -1deg;
+        }
+
+        .feature:nth-child(4) {
+
+            background: #ff8a00;
+
+            --rotation: 1deg;
+        }
+
+        .feature:nth-child(5) {
+
+            background: #b000ff;
 
             color: #fff;
+
+            --rotation: -1deg;
         }
 
+        .feature:nth-child(6) {
+
+            background: #fff;
+
+            --rotation: 1deg;
+        }
+
+        .feature-icon {
+
+            font-size: 36px;
+        }
+
+        .feature-name {
+
+            font-size: 18px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           SOCIALS
+        ========================================================= */
+
+        .social-section {
+
+            margin-top: 45px;
+
+            text-align: center;
+        }
+
+        .social-title {
+
+            font-size: 20px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            margin-bottom: 18px;
+        }
+
+        .socials {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 16px;
+
+            flex-wrap: wrap;
+        }
+
+        .social {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            min-width: 180px;
+
+            padding: 13px 20px;
+
+            border: 4px solid #000;
+
+            box-shadow: 5px 5px 0 #000;
+
+            text-decoration: none;
+
+            color: #000;
+
+            font-weight: 1000;
+
+            background: #fff;
+
+            transition:
+                transform .12s ease,
+                box-shadow .12s ease;
+        }
+
+        .social.youtube {
+
+            background: #ff3030;
+        }
+
+        .social.instagram {
+
+            background: #ff7ad9;
+        }
+
+        .social:hover {
+
+            transform:
+                translate(-3px, -3px)
+                rotate(-1deg);
+
+            box-shadow:
+                8px 8px 0 #000;
+        }
 
         .social svg {
-            width: 25px;
-            height: 25px;
 
-            flex-shrink: 0;
+            width: 23px;
+
+            height: 23px;
+
+            fill: currentColor;
         }
 
 
-        /* =====================================================
+        /* =========================================================
+           REQUIREMENTS
+        ========================================================= */
+
+        .requirements {
+
+            margin-top: 25px;
+
+            padding: 18px;
+
+            background: #fff;
+
+            border: 3px solid #000;
+
+            box-shadow: 5px 5px 0 #000;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================================
            FOOTER
-        ===================================================== */
+        ========================================================= */
 
         footer {
-            border-top: 4px solid #000;
 
-            background: #fffbdc;
+            margin-top: 45px;
 
-            padding: 25px;
+            padding-top: 22px;
+
+            border-top: 3px solid #000;
 
             text-align: center;
 
@@ -1001,510 +986,481 @@
             font-weight: 1000;
         }
 
+        .footer-links {
 
-        /* =====================================================
-           RANDOM JITTER
-        ===================================================== */
+            display: flex;
 
-        @keyframes jitter {
+            justify-content: center;
 
-            0%,
-            90%,
-            100% {
-                transform:
-                    rotate(-5deg);
-            }
+            gap: 20px;
 
-            92% {
-                transform:
-                    rotate(-9deg)
-                    translate(-2px, 2px);
-            }
+            margin-top: 10px;
 
-            94% {
-                transform:
-                    rotate(-2deg)
-                    translate(2px, -1px);
-            }
+            flex-wrap: wrap;
+        }
 
-            96% {
-                transform:
-                    rotate(-6deg);
-            }
+        .footer-links a {
 
+            font-weight: 1000;
+
+            text-decoration: underline;
         }
 
 
-        /* =====================================================
+        /* =========================================================
            MOBILE
-        ===================================================== */
+        ========================================================= */
 
         @media (max-width: 700px) {
 
             .topbar {
-                padding:
-                    12px 15px;
-            }
 
+                padding:
+                    10px 15px;
+            }
 
             .brand {
-                font-size: 13px;
-            }
 
-
-            .nav-status {
-                font-size: 10px;
-            }
-
-
-            .hero {
-                padding:
-                    50px 18px 30px;
-            }
-
-
-            .sticker {
-                font-size: 35px;
-            }
-
-
-            .sticker.one {
-                left: 5px;
-            }
-
-
-            .sticker.two {
-                right: 5px;
-            }
-
-
-            .hero-title {
-                font-size:
-                    clamp(48px, 15vw, 80px);
-
-                letter-spacing: -4px;
-
-                text-shadow:
-                    5px 5px 0 #ff00e6;
-            }
-
-
-            .hero-description {
-                font-size: 16px;
-            }
-
-
-            .download-section {
-                padding:
-                    0 18px 40px;
-            }
-
-
-            .release-card {
-                padding: 25px 20px;
-            }
-
-
-            .release-title {
-                font-size:
-                    clamp(35px, 11vw, 55px);
-            }
-
-
-            .download-grid {
-                grid-template-columns: 1fr;
-
-                gap: 18px;
-            }
-
-
-            .download-box {
-                min-height: 210px;
-            }
-
-
-            .feature-grid {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-
-            .feature {
-                min-height: 140px;
-
-                padding: 18px;
-            }
-
-
-            .feature-title {
                 font-size: 14px;
             }
 
+            .version-badge {
 
-            .social-section {
-                padding:
-                    20px 18px 50px;
+                font-size: 11px;
+
+                padding: 6px 9px;
             }
 
+            main {
 
-            .social {
+                padding:
+                    18px 15px 45px;
+            }
+
+            .hero {
+
+                padding:
+                    5px 5px 15px;
+            }
+
+            .logo-wrap {
+
+                width: 82px;
+
+                height: 82px;
+
+                margin-bottom: 18px;
+            }
+
+            .hero-badge {
+
+                font-size: 11px;
+
+                padding: 8px 11px;
+
+                margin-bottom: 22px;
+            }
+
+            .main-title {
+
+                font-size:
+                    clamp(
+                        54px,
+                        17vw,
+                        85px
+                    );
+
+                letter-spacing:
+                    -4px;
+
+                line-height:
+                    .83;
+
+                text-shadow:
+                    5px 5px 0 #ff00e6;
+
+                margin-bottom: 22px;
+            }
+
+            .description {
+
+                font-size: 16px;
+
+                line-height: 1.45;
+
+                margin-bottom: 22px;
+            }
+
+            .get-tool {
+
                 width: 100%;
 
-                max-width: 320px;
+                font-size: 18px;
+
+                padding:
+                    14px 18px;
             }
 
-        }
+            .sticker.fire {
 
+                left: -8px;
 
-        /* =====================================================
-           SMALL PHONES
-        ===================================================== */
+                top: 5px;
 
-        @media (max-width: 430px) {
+                font-size: 42px;
+            }
 
-            .feature-grid {
+            .sticker.star {
+
+                right: -4px;
+
+                top: 55px;
+
+                font-size: 36px;
+            }
+
+            .sticker.eyes {
+
+                left: 0;
+
+                bottom: 75px;
+
+                font-size: 30px;
+            }
+
+            .sticker.disc {
+
+                right: 5px;
+
+                bottom: 65px;
+
+                font-size: 30px;
+            }
+
+            .downloads {
+
                 grid-template-columns: 1fr;
             }
 
+            .features {
 
-            .hero-title {
-                font-size:
-                    48px;
+                grid-template-columns: 1fr 1fr;
+
+                gap: 12px;
             }
 
+            .feature {
 
-            .release-card::after {
-                display: none;
+                min-height: 125px;
+
+                padding: 14px;
             }
 
+            .feature-icon {
 
-            .section-heading {
-                font-size: 24px;
+                font-size: 28px;
+            }
+
+            .feature-name {
+
+                font-size: 14px;
             }
 
         }
 
 
-        /* =====================================================
-           REDUCED MOTION
-        ===================================================== */
+        /* =========================================================
+           SMALL PHONES
+        ========================================================= */
 
-        @media (prefers-reduced-motion: reduce) {
+        @media (max-width: 430px) {
 
-            *,
-            *::before,
-            *::after {
-                animation: none !important;
+            .brand-mark {
 
-                transition: none !important;
+                width: 16px;
+
+                height: 16px;
             }
 
+            .brand {
+
+                font-size: 12px;
+
+                gap: 8px;
+            }
+
+            .version-badge {
+
+                font-size: 9px;
+
+                border-width: 2px;
+
+                box-shadow: 3px 3px 0 #000;
+            }
+
+            .main-title {
+
+                font-size: 55px;
+
+                letter-spacing:
+                    -3px;
+            }
+
+            .features {
+
+                grid-template-columns: 1fr;
+            }
+
+            .social {
+
+                width: 100%;
+            }
         }
 
     </style>
-
 </head>
 
 
 <body>
 
 
-<div class="page">
-
-
-    <!-- =====================================================
+    <!-- =========================================================
          TOP BAR
-    ===================================================== -->
+    ========================================================== -->
 
     <header class="topbar">
 
         <div class="brand">
 
-            <div class="brand-dot"></div>
+            <span class="brand-mark"></span>
 
-            HUMBLE STUDIO TOOL
+            <span>
+                HUMBLE STUDIO TOOL
+            </span>
 
         </div>
 
-
-        <div class="nav-status">
-
-            ● V4.0 LIVE
-
+        <div class="version-badge">
+            • V4.0 LIVE
         </div>
 
     </header>
 
 
-
-    <!-- =====================================================
+    <!-- =========================================================
          MARQUEE
-    ===================================================== -->
+    ========================================================== -->
 
     <div class="marquee">
 
         <div class="marquee-track">
 
-            <span>
-                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
-            </span>
+            <div class="marquee-content">
 
-            <span>
-                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
-            </span>
+                ⚡ HUMBLE STUDIO TOOL
+                • ADOBE WORKFLOW
+                • DISCORD RICH PRESENCE
+                • STREAKS
+                • COMMUNITY RANKING
+                • ⚡
 
-            <span>
-                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
-            </span>
+            </div>
+
+            <div class="marquee-content">
+
+                ⚡ HUMBLE STUDIO TOOL
+                ⚡
+
+            </div>
 
         </div>
 
     </div>
 
 
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
 
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
-
-    <section class="hero">
-
-
-        <div class="sticker one">
-            🔥
-        </div>
+    <main>
 
 
-        <div class="sticker two">
-            ✨
-        </div>
+        <!-- =====================================================
+             HERO
+        ====================================================== -->
+
+        <section class="hero">
 
 
-        <div class="sticker three">
-            👀
-        </div>
+            <!-- FLOATING STICKERS -->
+
+            <div class="sticker fire">
+                🔥
+            </div>
+
+            <div class="sticker star">
+                ✨
+            </div>
+
+            <div class="sticker eyes">
+                👀
+            </div>
+
+            <div class="sticker disc">
+                💿
+            </div>
 
 
-        <div class="sticker four">
-            💿
-        </div>
+            <!-- LOGO -->
 
+            <div class="logo-wrap">
 
-
-        <!-- LOGO -->
-
-        <div class="logo-wrap">
-
-            <img
-                class="logo"
-                src="logo.jpg"
-                alt="Humble Studio Tool"
-            >
-
-        </div>
-
-
-
-        <!-- TAG -->
-
-        <div class="chaos-tag">
-
-            ⚠️ MADE FOR EDITORS WHO DON'T TOUCH GRASS ⚠️
-
-        </div>
-
-
-
-        <!-- TITLE -->
-
-        <h1 class="hero-title">
-
-            HUMBLE<br>
-            STUDIO<br>
-            TOOL
-
-        </h1>
-
-
-
-        <!-- DESCRIPTION -->
-
-        <p class="hero-description">
-
-            Your Adobe workflow companion.
-            Track your editing time, keep your streak alive,
-            show what you're doing on Discord and climb the
-            Humble community rankings.
-
-        </p>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         DOWNLOAD SECTION
-    ===================================================== -->
-
-    <section class="download-section">
-
-
-        <h2 class="section-heading">
-
-            📦 GET THE TOOL
-
-        </h2>
-
-
-
-        <!-- RELEASE -->
-
-        <div class="release-card">
-
-            <div class="release-label">
-
-                ⚠️ OFFICIAL RELEASE
+                <img
+                    src="logo.jpg"
+                    alt="Humble Studio Tool"
+                >
 
             </div>
 
 
-            <div class="release-title">
+            <!-- BADGE -->
 
-                HUMBLE STUDIO<br>
-                TOOL V4.0
+            <div class="hero-badge">
 
-            </div>
-
-
-            <div class="release-info">
-
-                WINDOWS + macOS • LATEST VERSION • FREE
+                ⚠ MADE FOR EDITORS
+                WHO DON'T TOUCH GRASS ⚠
 
             </div>
 
-        </div>
+
+            <!-- TITLE -->
+
+            <h1 class="main-title">
+
+                HUMBLE<br>
+                STUDIO<br>
+                TOOL
+
+            </h1>
 
 
+            <!-- DESCRIPTION -->
 
-        <!-- DOWNLOAD GRID -->
+            <p class="description">
 
-        <div class="download-grid">
+                Your Adobe workflow companion.
+                Track your editing time, keep your streak alive,
+                show what you're doing on Discord and climb the
+                Humble community rankings.
+
+            </p>
 
 
-            <!-- WINDOWS -->
+            <!-- GET TOOL -->
 
             <a
-                class="download-box windows"
-                href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_Windows.zip"
+                class="get-tool"
+                href="#downloads"
             >
 
-                <div class="download-icon">
-
-                    🪟
-
-                </div>
-
-
-                <div class="download-name">
-
-                    Windows
-
-                </div>
-
-
-                <div class="download-description">
-
-                    Windows 10 / 11<br>
-                    Bundled Node.js<br>
-                    Ready to install
-
-                </div>
-
-
-                <div class="download-button">
-
-                    DOWNLOAD ZIP →
-
-                </div>
+                📦 GET THE TOOL
 
             </a>
 
 
-
-            <!-- MAC -->
-
-            <a
-                class="download-box mac"
-                href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_macOS.zip"
-            >
-
-                <div class="download-icon">
-
-                    🍎
-
-                </div>
-
-
-                <div class="download-name">
-
-                    macOS
-
-                </div>
-
-
-                <div class="download-description">
-
-                    macOS compatible<br>
-                    Adobe workflow support<br>
-                    Ready to install
-
-                </div>
-
-
-                <div class="download-button">
-
-                    DOWNLOAD ZIP →
-
-                </div>
-
-            </a>
-
-
-        </div>
+        </section>
 
 
 
-        <!-- =================================================
-             FEATURES
-        ================================================= -->
+        <!-- =====================================================
+             DOWNLOAD SECTION
+        ====================================================== -->
 
-        <section class="features">
+        <section
+            class="section"
+            id="downloads"
+        >
 
-
-            <h2 class="section-heading">
-
-                🔥 WHAT'S INSIDE
-
+            <h2 class="section-title">
+                📦 GET HUMBLE STUDIO TOOL
             </h2>
 
 
+            <div class="download-card">
 
-            <div class="feature-grid">
+                <div class="version">
 
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        🟢
-                    </div>
-
-                    <div class="feature-title">
-                        Total Usage
-                    </div>
+                    🔥 VERSION 4.0
+                    • LATEST RELEASE
 
                 </div>
 
+
+                <div class="downloads">
+
+
+                    <!-- WINDOWS -->
+
+                    <a
+                        class="download"
+                        href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_Windows.zip"
+                    >
+
+                        🪟
+                        DOWNLOAD FOR WINDOWS
+
+                    </a>
+
+
+                    <!-- MAC -->
+
+                    <a
+                        class="download"
+                        href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_macOS.zip"
+                    >
+
+                        🍎
+                        DOWNLOAD FOR macOS
+
+                    </a>
+
+
+                </div>
+
+
+                <div class="requirements">
+
+                    <strong>REQUIREMENTS</strong>
+                    <br><br>
+
+                    🎬 Adobe After Effects / Premiere Pro
+                    <br>
+
+                    💻 Windows 10/11 or macOS
+                    <br>
+
+                    💬 Discord Desktop required
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FEATURES
+        ====================================================== -->
+
+        <section class="section">
+
+            <h2 class="section-title">
+                ⚡ FEATURES
+            </h2>
+
+
+            <div class="features">
 
 
                 <div class="feature">
@@ -1513,12 +1469,24 @@
                         ⏱️
                     </div>
 
-                    <div class="feature-title">
+                    <div class="feature-name">
                         Adobe Session Timer
                     </div>
 
                 </div>
 
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🟢
+                    </div>
+
+                    <div class="feature-name">
+                        Total Usage Time
+                    </div>
+
+                </div>
 
 
                 <div class="feature">
@@ -1527,12 +1495,11 @@
                         🔥
                     </div>
 
-                    <div class="feature-title">
+                    <div class="feature-name">
                         Daily Streak
                     </div>
 
                 </div>
-
 
 
                 <div class="feature">
@@ -1541,12 +1508,11 @@
                         🏆
                     </div>
 
-                    <div class="feature-title">
+                    <div class="feature-name">
                         Community Ranking
                     </div>
 
                 </div>
-
 
 
                 <div class="feature">
@@ -1555,21 +1521,20 @@
                         🎬
                     </div>
 
-                    <div class="feature-title">
+                    <div class="feature-name">
                         AE / Premiere Detection
                     </div>
 
                 </div>
 
 
-
                 <div class="feature">
 
                     <div class="feature-icon">
-                        🎮
+                        💬
                     </div>
 
-                    <div class="feature-title">
+                    <div class="feature-name">
                         Discord Rich Presence
                     </div>
 
@@ -1578,162 +1543,122 @@
 
             </div>
 
+        </section>
+
+
+
+        <!-- =====================================================
+             SOCIALS
+        ====================================================== -->
+
+        <section class="social-section">
+
+            <div class="social-title">
+
+                👀 FOLLOW HUMBLE
+
+            </div>
+
+
+            <div class="socials">
+
+
+                <!-- YOUTUBE -->
+
+                <a
+                    class="social youtube"
+                    href="https://www.youtube.com/@humbleae"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.8V8.2l6.5 3.8-6.5 3.8z"
+                        />
+
+                    </svg>
+
+                    YOUTUBE
+
+                </a>
+
+
+                <!-- INSTAGRAM -->
+
+                <a
+                    class="social instagram"
+                    href="https://www.instagram.com/humble.edit/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5A4.5 4.5 0 1 1 7.5 12 4.5 4.5 0 0 1 12 7.5zm0 2A2.5 2.5 0 1 0 14.5 12 2.5 2.5 0 0 0 12 9.5zM17.5 6.5a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"
+                        />
+
+                    </svg>
+
+                    INSTAGRAM
+
+                </a>
+
+
+            </div>
 
         </section>
 
 
 
-        <!-- =================================================
-             REQUIREMENTS
-        ================================================= -->
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
 
-        <div class="requirements">
+        <footer>
 
-            <h3>
+            © 2026 HUMBLE STUDIO TOOL
 
-                ⚠️ REQUIREMENTS
+            <div class="footer-links">
 
-            </h3>
-
-
-            <p>
-
-                Discord Desktop<br>
-
-                Adobe After Effects and/or Premiere Pro<br>
-
-                Windows 10/11 or macOS<br>
-
-                Internet connection for community features
-
-            </p>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         SOCIAL SECTION
-    ===================================================== -->
-
-    <section class="social-section">
-
-
-        <h2 class="social-heading">
-
-            FIND HUMBLE ONLINE
-
-        </h2>
-
-
-
-        <div class="social-grid">
-
-
-            <!-- INSTAGRAM -->
-
-            <a
-                class="social instagram"
-                href="https://www.instagram.com/humble.edit/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
+                <a
+                    href="https://github.com/humblelyy/HumbleStudioTool"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
+                    GitHub
+                </a>
 
-                    <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="5"
-                    />
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="4"
-                    />
-
-                    <circle
-                        cx="17.5"
-                        cy="6.5"
-                        r="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
-                </svg>
-
-
-                INSTAGRAM
-
-            </a>
-
-
-
-            <!-- YOUTUBE -->
-
-            <a
-                class="social youtube"
-                href="https://www.youtube.com/@humbleae"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
+                <a
+                    href="https://www.youtube.com/@humbleae"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
+                    YouTube
+                </a>
 
-                    <path
-                        d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z"
-                    />
+                <a
+                    href="https://www.instagram.com/humble.edit/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Instagram
+                </a>
 
-                    <path
-                        d="M9.6 15.6 15.8 12 9.6 8.4v7.2Z"
-                        fill="#ff3030"
-                    />
+            </div>
 
-                </svg>
-
-
-                YOUTUBE
-
-            </a>
+        </footer>
 
 
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ===================================================== -->
-
-    <footer>
-
-        © 2026 HUMBLE STUDIO TOOL
-
-        <br>
-
-        BUILT FOR EDITORS. ⚡
-
-    </footer>
-
-
-</div>
+    </main>
 
 
 </body>
