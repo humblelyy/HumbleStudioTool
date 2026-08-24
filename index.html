@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,136 +27,174 @@
             min-height: 100vh;
 
             font-family:
+                Arial Black,
+                Impact,
                 Arial,
                 Helvetica,
                 sans-serif;
 
-            background: #fff8df;
+            background: #fff500;
 
-            color: #000000;
+            color: #000;
 
             overflow-x: hidden;
+        }
 
+
+        /* =====================================================
+           SELECTION
+        ===================================================== */
+
+        ::selection {
+            background: #ff00e6;
+            color: #fff;
+        }
+
+
+        /* =====================================================
+           PAGE
+        ===================================================== */
+
+        .page {
             position: relative;
+
+            min-height: 100vh;
+
+            overflow: hidden;
         }
 
 
         /* =====================================================
-           ANIMATED BACKGROUND SHAPES
+           TOP NAV
         ===================================================== */
 
-        body::before {
-            content: "";
-
-            position: fixed;
-
-            width: 260px;
-            height: 260px;
-
-            background: #ff4fb3;
-
-            border: 3px solid #000000;
-
-            border-radius: 50%;
-
-            top: -100px;
-            right: -80px;
-
-            box-shadow:
-                8px 8px 0px #000000;
-
-            z-index: -1;
-
-            animation:
-                floatBubble 5s ease-in-out infinite;
-        }
-
-        body::after {
-            content: "";
-
-            position: fixed;
-
-            width: 220px;
-            height: 220px;
-
-            background: #00d9ff;
-
-            border: 3px solid #000000;
-
-            bottom: -100px;
-            left: -80px;
-
-            transform: rotate(15deg);
-
-            box-shadow:
-                8px 8px 0px #000000;
-
-            z-index: -1;
-
-            animation:
-                floatBubble2 6s ease-in-out infinite;
-        }
-
-
-        @keyframes floatBubble {
-
-            0% {
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-            }
-
-            50% {
-                transform:
-                    translateY(25px)
-                    rotate(8deg);
-            }
-
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(0deg);
-            }
-        }
-
-
-        @keyframes floatBubble2 {
-
-            0% {
-                transform:
-                    translateY(0)
-                    rotate(15deg);
-            }
-
-            50% {
-                transform:
-                    translateY(-25px)
-                    rotate(25deg);
-            }
-
-            100% {
-                transform:
-                    translateY(0)
-                    rotate(15deg);
-            }
-        }
-
-
-        /* =====================================================
-           MAIN CONTAINER
-        ===================================================== */
-
-        .container {
+        .topbar {
             width: 100%;
 
-            max-width: 760px;
+            min-height: 72px;
 
-            margin: 0 auto;
+            background: #fffbdc;
 
-            padding:
-                55px 20px 35px;
+            border-bottom: 4px solid #000;
 
-            text-align: center;
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 14px 28px;
+
+            position: relative;
+
+            z-index: 20;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 18px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+        }
+
+
+        .brand-dot {
+            width: 22px;
+            height: 22px;
+
+            background: #ff00e6;
+
+            border: 3px solid #000;
+
+            box-shadow: 3px 3px 0 #000;
+
+            transform: rotate(-8deg);
+
+            animation: jitter 1.8s infinite;
+        }
+
+
+        .nav-status {
+            padding: 7px 12px;
+
+            background: #00eaff;
+
+            border: 3px solid #000;
+
+            box-shadow: 3px 3px 0 #000;
+
+            font-size: 12px;
+
+            font-weight: 1000;
+        }
+
+
+        /* =====================================================
+           MARQUEE
+        ===================================================== */
+
+        .marquee {
+            width: 100%;
+
+            overflow: hidden;
+
+            background: #000;
+
+            color: #fff500;
+
+            border-bottom: 4px solid #000;
+
+            white-space: nowrap;
+
+            padding: 10px 0;
+
+            position: relative;
+
+            z-index: 15;
+        }
+
+
+        .marquee-track {
+            display: inline-flex;
+
+            width: max-content;
+
+            animation:
+                marquee 18s linear infinite;
+        }
+
+
+        .marquee span {
+            display: inline-block;
+
+            padding-right: 40px;
+
+            font-size: 16px;
+
+            font-weight: 1000;
+
+            letter-spacing: 1px;
+        }
+
+
+        @keyframes marquee {
+
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+
         }
 
 
@@ -164,13 +203,88 @@
         ===================================================== */
 
         .hero {
-            display: flex;
+            max-width: 1050px;
 
-            flex-direction: column;
+            margin: 0 auto;
 
-            align-items: center;
+            padding:
+                70px 25px 40px;
 
-            text-align: center;
+            position: relative;
+
+            text-align: left;
+        }
+
+
+        /* =====================================================
+           FLOATING STICKERS
+        ===================================================== */
+
+        .sticker {
+            position: absolute;
+
+            font-size: 55px;
+
+            pointer-events: none;
+
+            user-select: none;
+
+            z-index: 2;
+
+            animation:
+                float 3.5s ease-in-out infinite;
+        }
+
+
+        .sticker.one {
+            top: 40px;
+            left: 20px;
+
+            transform: rotate(-15deg);
+        }
+
+
+        .sticker.two {
+            top: 120px;
+            right: 20px;
+
+            transform: rotate(13deg);
+
+            animation-delay: .7s;
+        }
+
+
+        .sticker.three {
+            bottom: 10px;
+            left: 60px;
+
+            transform: rotate(12deg);
+
+            animation-delay: 1.2s;
+        }
+
+
+        .sticker.four {
+            bottom: 20px;
+            right: 50px;
+
+            transform: rotate(-15deg);
+
+            animation-delay: .4s;
+        }
+
+
+        @keyframes float {
+
+            0%,
+            100% {
+                translate: 0 0;
+            }
+
+            50% {
+                translate: 0 -15px;
+            }
+
         }
 
 
@@ -178,261 +292,544 @@
            LOGO
         ===================================================== */
 
+        .logo-wrap {
+            width: 125px;
+            height: 125px;
+
+            background: #fff;
+
+            border: 4px solid #000;
+
+            box-shadow:
+                8px 8px 0 #000;
+
+            transform:
+                rotate(-5deg);
+
+            margin-bottom: 35px;
+
+            position: relative;
+
+            z-index: 5;
+
+            animation:
+                logoJitter 3s infinite;
+        }
+
+
         .logo {
-            width: 105px;
-            height: 105px;
+            width: 100%;
+            height: 100%;
 
             object-fit: cover;
 
-            border-radius: 50%;
-
-            border:
-                3px solid #000000;
-
-            background: #ffffff;
-
-            box-shadow:
-                7px 7px 0px #000000;
-
-            margin-bottom: 25px;
-
-            transition:
-                transform 0.15s ease,
-                box-shadow 0.15s ease;
-        }
-
-        .logo:hover {
-            transform:
-                translate(3px, 3px);
-
-            box-shadow:
-                4px 4px 0px #000000;
+            display: block;
         }
 
 
-        /* =====================================================
-           BADGE
-        ===================================================== */
+        @keyframes logoJitter {
 
-        .badge {
-            display: inline-block;
+            0%,
+            90%,
+            100% {
+                transform: rotate(-5deg);
+            }
 
-            padding:
-                8px 14px;
+            92% {
+                transform:
+                    rotate(-2deg)
+                    translate(2px, -2px);
+            }
 
-            margin-bottom: 20px;
+            94% {
+                transform:
+                    rotate(-7deg)
+                    translate(-2px, 2px);
+            }
 
-            background: #ffde00;
+            96% {
+                transform: rotate(-4deg);
+            }
 
-            border:
-                3px solid #000000;
-
-            box-shadow:
-                4px 4px 0px #000000;
-
-            font-size: 12px;
-
-            font-weight: 900;
-
-            letter-spacing: 1px;
         }
 
 
         /* =====================================================
-           TITLE
+           MAIN TITLE
         ===================================================== */
 
-        h1 {
+        .hero-title {
+            position: relative;
+
+            z-index: 5;
+
+            max-width: 850px;
+
             font-size:
-                clamp(42px, 8vw, 72px);
+                clamp(55px, 10vw, 120px);
 
-            line-height: 0.95;
+            line-height: .82;
 
-            font-weight: 1000;
-
-            letter-spacing: -3px;
-
-            margin-bottom: 25px;
+            letter-spacing: -7px;
 
             text-transform: uppercase;
 
+            margin-bottom: 35px;
+
             text-shadow:
-                5px 5px 0px #ff4fb3;
+                8px 8px 0 #ff00e6;
+
+            animation:
+                titleJitter 4s infinite;
+        }
+
+
+        @keyframes titleJitter {
+
+            0%,
+            94%,
+            100% {
+                transform: translate(0);
+            }
+
+            95% {
+                transform:
+                    translate(-3px, 2px)
+                    skewX(-2deg);
+            }
+
+            96% {
+                transform:
+                    translate(3px, -1px)
+                    skewX(2deg);
+            }
+
+            97% {
+                transform: translate(0);
+            }
+
         }
 
 
         /* =====================================================
-           DESCRIPTION
+           SUBTITLE
         ===================================================== */
 
-        .subtitle {
-            max-width: 600px;
+        .hero-description {
+            max-width: 650px;
 
-            margin:
-                0 auto 40px;
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            font-size: 18px;
+            font-size: 19px;
 
-            line-height: 1.55;
+            font-weight: 800;
 
-            font-weight: 700;
+            line-height: 1.5;
+
+            margin-bottom: 35px;
+
+            position: relative;
+
+            z-index: 5;
         }
 
 
         /* =====================================================
-           DOWNLOAD CARD
+           CHAOS TAG
         ===================================================== */
 
-        .card {
-            width: 100%;
+        .chaos-tag {
+            display: inline-block;
 
-            padding: 30px;
+            padding: 10px 16px;
 
-            background: #ffffff;
+            background: #ff00e6;
 
-            border:
-                3px solid #000000;
+            color: #fff;
 
-            border-radius: 0;
+            border: 4px solid #000;
 
             box-shadow:
-                8px 8px 0px #000000;
+                6px 6px 0 #000;
 
-            text-align: center;
+            transform:
+                rotate(-2deg);
+
+            font-size: 14px;
+
+            font-weight: 1000;
+
+            margin-bottom: 35px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        /* =====================================================
+           DOWNLOAD SECTION
+        ===================================================== */
+
+        .download-section {
+            max-width: 1000px;
+
+            margin: 20px auto 0;
+
+            padding: 0 25px 60px;
 
             position: relative;
         }
 
 
         /* =====================================================
-           CARD COLOR STRIPE
+           SECTION HEADING
         ===================================================== */
 
-        .card::before {
-            content: "";
-
-            position: absolute;
-
-            top: 0;
-            left: 0;
-            right: 0;
-
-            height: 12px;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #ff4fb3 0%,
-                    #ff4fb3 25%,
-                    #00d9ff 25%,
-                    #00d9ff 50%,
-                    #00df73 50%,
-                    #00df73 75%,
-                    #ff8a00 75%,
-                    #ff8a00 100%
-                );
-
-            border-bottom:
-                3px solid #000000;
-        }
-
-
-        /* =====================================================
-           VERSION
-        ===================================================== */
-
-        .version {
-            display: inline-block;
-
-            margin:
-                15px auto 25px;
-
-            padding:
-                7px 12px;
-
-            background: #000000;
-
-            color: #ffffff;
-
-            font-size: 13px;
-
-            font-weight: 900;
-
-            letter-spacing: 1px;
-        }
-
-
-        /* =====================================================
-           DOWNLOAD BUTTONS
-        ===================================================== */
-
-        .download {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            width: 100%;
-
-            min-height: 58px;
-
-            padding:
-                15px 20px;
-
-            margin-top: 14px;
-
-            color: #000000;
-
-            text-decoration: none;
-
-            font-size: 16px;
+        .section-heading {
+            font-size: 30px;
 
             font-weight: 1000;
 
-            border:
-                3px solid #000000;
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            background: #fff;
+
+            border: 4px solid #000;
 
             box-shadow:
-                5px 5px 0px #000000;
+                6px 6px 0 #000;
+
+            transform:
+                rotate(-1deg);
+        }
+
+
+        /* =====================================================
+           RELEASE CARD
+        ===================================================== */
+
+        .release-card {
+            background: #ff00e6;
+
+            border: 4px solid #000;
+
+            box-shadow:
+                9px 9px 0 #000;
+
+            padding: 30px;
+
+            transform:
+                rotate(-1deg);
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-bottom: 45px;
+        }
+
+
+        .release-card::after {
+            content: "LATEST";
+
+            position: absolute;
+
+            right: -35px;
+            top: 20px;
+
+            padding: 9px 45px;
+
+            background: #00ff38;
+
+            border: 3px solid #000;
+
+            transform: rotate(35deg);
+
+            font-size: 13px;
+
+            font-weight: 1000;
+        }
+
+
+        .release-label {
+            font-size: 14px;
+
+            color: #fff;
+
+            margin-bottom: 12px;
+
+            font-weight: 1000;
+        }
+
+
+        .release-title {
+            font-size:
+                clamp(35px, 6vw, 65px);
+
+            line-height: .9;
+
+            text-transform: uppercase;
+
+            color: #fff;
+
+            text-shadow:
+                4px 4px 0 #00eaff;
+
+            margin-bottom: 20px;
+        }
+
+
+        .release-info {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-weight: 900;
+
+            font-size: 17px;
+
+            color: #fff;
+        }
+
+
+        /* =====================================================
+           DOWNLOAD GRID
+        ===================================================== */
+
+        .download-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 22px;
+
+            margin-top: 25px;
+        }
+
+
+        /* =====================================================
+           DOWNLOAD BOX
+        ===================================================== */
+
+        .download-box {
+            padding: 30px 25px;
+
+            border: 4px solid #000;
+
+            box-shadow:
+                7px 7px 0 #000;
+
+            text-decoration: none;
+
+            color: #000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+
+            min-height: 230px;
 
             transition:
-                transform 0.12s ease,
-                box-shadow 0.12s ease;
+                transform .15s ease,
+                box-shadow .15s ease;
+
+            position: relative;
         }
 
-        .download:hover {
+
+        .download-box:hover {
             transform:
-                translate(3px, 3px);
+                translate(4px, 4px)
+                rotate(0deg);
 
             box-shadow:
-                2px 2px 0px #000000;
+                3px 3px 0 #000;
         }
 
-        .download:active {
-            transform:
-                translate(5px, 5px);
 
-            box-shadow:
-                0px 0px 0px #000000;
+        .download-box.windows {
+            background: #00eaff;
+
+            transform:
+                rotate(1.5deg);
+        }
+
+
+        .download-box.mac {
+            background: #00ff38;
+
+            transform:
+                rotate(-1.5deg);
+        }
+
+
+        .download-icon {
+            font-size: 55px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .download-name {
+            font-size: 28px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+
+        .download-description {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            line-height: 1.5;
+
+            margin-bottom: auto;
+        }
+
+
+        .download-button {
+            margin-top: 22px;
+
+            background: #000;
+
+            color: #fff;
+
+            padding: 12px 17px;
+
+            font-size: 13px;
+
+            font-weight: 1000;
+
+            border: 0;
         }
 
 
         /* =====================================================
-           WINDOWS
+           FEATURES
         ===================================================== */
 
-        .download.windows {
-            background: #00df73;
+        .features {
+            margin-top: 60px;
         }
 
 
-        /* =====================================================
-           macOS
-        ===================================================== */
+        .feature-grid {
+            display: grid;
 
-        .download.mac {
-            background: #00d9ff;
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .feature {
+            min-height: 150px;
+
+            padding: 22px;
+
+            border: 4px solid #000;
+
+            box-shadow:
+                6px 6px 0 #000;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            transition:
+                transform .15s ease;
+        }
+
+
+        .feature:hover {
+            transform:
+                translateY(-7px)
+                rotate(-2deg);
+        }
+
+
+        .feature:nth-child(1) {
+            background: #00eaff;
+
+            transform: rotate(-1deg);
+        }
+
+
+        .feature:nth-child(2) {
+            background: #ff7b00;
+
+            transform: rotate(2deg);
+        }
+
+
+        .feature:nth-child(3) {
+            background: #00ff38;
+
+            transform: rotate(-1deg);
+        }
+
+
+        .feature:nth-child(4) {
+            background: #ff5ac8;
+
+            transform: rotate(2deg);
+        }
+
+
+        .feature:nth-child(5) {
+            background: #fff;
+
+            transform: rotate(-2deg);
+        }
+
+
+        .feature:nth-child(6) {
+            background: #9b5cff;
+
+            transform: rotate(1deg);
+        }
+
+
+        .feature-icon {
+            font-size: 32px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .feature-title {
+            font-size: 17px;
+
+            font-weight: 1000;
+
+            text-transform: uppercase;
         }
 
 
@@ -441,73 +838,83 @@
         ===================================================== */
 
         .requirements {
-            margin-top: 30px;
+            margin-top: 55px;
 
-            padding-top: 22px;
+            padding: 25px;
 
-            border-top:
-                3px solid #000000;
+            background: #000;
 
-            font-size: 13px;
+            color: #fff500;
 
-            font-weight: 700;
+            border: 4px solid #000;
 
-            line-height: 1.8;
+            box-shadow:
+                7px 7px 0 #ff00e6;
+
+            transform:
+                rotate(.5deg);
         }
 
 
-        /* =====================================================
-           SOCIAL TITLE
-        ===================================================== */
+        .requirements h3 {
+            font-size: 22px;
 
-        .social-title {
-            margin-top: 55px;
-
-            margin-bottom: 20px;
-
-            font-size: 24px;
-
-            font-weight: 1000;
+            margin-bottom: 15px;
 
             text-transform: uppercase;
         }
 
-        .social-title span {
-            display: inline-block;
 
-            background: #ffde00;
+        .requirements p {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-            padding:
-                4px 8px;
+            font-size: 14px;
 
-            border:
-                3px solid #000000;
+            line-height: 1.8;
 
-            box-shadow:
-                4px 4px 0px #000000;
+            font-weight: 800;
         }
 
 
         /* =====================================================
-           SOCIAL LINKS
+           SOCIAL
         ===================================================== */
 
-        .social-links {
+        .social-section {
+            max-width: 1000px;
+
+            margin: 40px auto 0;
+
+            padding: 30px 25px 65px;
+
+            text-align: center;
+        }
+
+
+        .social-heading {
+            font-size: 32px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+
+            font-weight: 1000;
+        }
+
+
+        .social-grid {
             display: flex;
 
             justify-content: center;
 
-            align-items: center;
+            gap: 20px;
 
-            gap: 15px;
-
-            width: 100%;
+            flex-wrap: wrap;
         }
 
-
-        /* =====================================================
-           SOCIAL BUTTON
-        ===================================================== */
 
         .social {
             display: flex;
@@ -516,90 +923,63 @@
 
             justify-content: center;
 
-            gap: 9px;
+            gap: 12px;
 
-            min-width: 160px;
+            min-width: 210px;
 
-            padding:
-                13px 18px;
+            padding: 16px 22px;
 
-            color: #000000;
+            border: 4px solid #000;
+
+            box-shadow:
+                6px 6px 0 #000;
 
             text-decoration: none;
 
-            border:
-                3px solid #000000;
+            color: #000;
 
-            box-shadow:
-                5px 5px 0px #000000;
-
-            font-size: 14px;
+            font-size: 15px;
 
             font-weight: 1000;
 
             transition:
-                transform 0.12s ease,
-                box-shadow 0.12s ease;
+                transform .12s ease,
+                box-shadow .12s ease;
         }
+
 
         .social:hover {
             transform:
-                translate(3px, 3px);
+                translate(4px, 4px);
 
             box-shadow:
-                2px 2px 0px #000000;
-        }
-
-        .social:active {
-            transform:
-                translate(5px, 5px);
-
-            box-shadow:
-                0px 0px 0px #000000;
+                2px 2px 0 #000;
         }
 
 
-        /* =====================================================
-           INSTAGRAM
-        ===================================================== */
-
-        .instagram {
+        .social.instagram {
             background:
                 linear-gradient(
                     135deg,
-                    #ff4fb3 0%,
-                    #ff2d55 45%,
-                    #ff8a00 100%
+                    #ff00e6,
+                    #ff004f,
+                    #ff9500
                 );
         }
 
 
-        /* =====================================================
-           YOUTUBE
-        ===================================================== */
+        .social.youtube {
+            background: #ff3030;
 
-        .youtube {
-            background:
-                #ff3b30;
+            color: #fff;
         }
 
 
-        /* =====================================================
-           SVG SOCIAL ICONS
-        ===================================================== */
-
-        .social-icon {
-            width: 23px;
-            height: 23px;
-
-            flex-shrink: 0;
-
-            display: block;
-        }
-
-        .youtube-icon {
+        .social svg {
             width: 25px;
             height: 25px;
+
+            flex-shrink: 0;
         }
 
 
@@ -608,16 +988,50 @@
         ===================================================== */
 
         footer {
-            margin-top: 35px;
+            border-top: 4px solid #000;
 
-            padding-top: 20px;
+            background: #fffbdc;
 
-            border-top:
-                3px solid #000000;
+            padding: 25px;
+
+            text-align: center;
 
             font-size: 13px;
 
-            font-weight: 900;
+            font-weight: 1000;
+        }
+
+
+        /* =====================================================
+           RANDOM JITTER
+        ===================================================== */
+
+        @keyframes jitter {
+
+            0%,
+            90%,
+            100% {
+                transform:
+                    rotate(-5deg);
+            }
+
+            92% {
+                transform:
+                    rotate(-9deg)
+                    translate(-2px, 2px);
+            }
+
+            94% {
+                transform:
+                    rotate(-2deg)
+                    translate(2px, -1px);
+            }
+
+            96% {
+                transform:
+                    rotate(-6deg);
+            }
+
         }
 
 
@@ -625,83 +1039,147 @@
            MOBILE
         ===================================================== */
 
-        @media (max-width: 520px) {
+        @media (max-width: 700px) {
 
-            .container {
+            .topbar {
                 padding:
-                    35px 15px 30px;
+                    12px 15px;
             }
 
 
-            .logo {
-                width: 82px;
-                height: 82px;
-
-                margin-bottom: 20px;
+            .brand {
+                font-size: 13px;
             }
 
 
-            .badge {
+            .nav-status {
                 font-size: 10px;
-
-                padding:
-                    7px 10px;
             }
 
 
-            h1 {
-                font-size:
-                    clamp(38px, 12vw, 52px);
+            .hero {
+                padding:
+                    50px 18px 30px;
+            }
 
-                letter-spacing:
-                    -2px;
+
+            .sticker {
+                font-size: 35px;
+            }
+
+
+            .sticker.one {
+                left: 5px;
+            }
+
+
+            .sticker.two {
+                right: 5px;
+            }
+
+
+            .hero-title {
+                font-size:
+                    clamp(48px, 15vw, 80px);
+
+                letter-spacing: -4px;
 
                 text-shadow:
-                    4px 4px 0px #ff4fb3;
+                    5px 5px 0 #ff00e6;
             }
 
 
-            .subtitle {
-                font-size: 15px;
-
-                margin-bottom: 30px;
+            .hero-description {
+                font-size: 16px;
             }
 
 
-            .card {
+            .download-section {
                 padding:
-                    25px 18px;
-
-                box-shadow:
-                    6px 6px 0px #000000;
+                    0 18px 40px;
             }
 
 
-            .download {
+            .release-card {
+                padding: 25px 20px;
+            }
+
+
+            .release-title {
+                font-size:
+                    clamp(35px, 11vw, 55px);
+            }
+
+
+            .download-grid {
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+
+            .download-box {
+                min-height: 210px;
+            }
+
+
+            .feature-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .feature {
+                min-height: 140px;
+
+                padding: 18px;
+            }
+
+
+            .feature-title {
                 font-size: 14px;
-
-                min-height: 54px;
             }
 
 
-            .social-links {
-                flex-direction: column;
-
-                align-items: center;
-
-                gap: 12px;
+            .social-section {
+                padding:
+                    20px 18px 50px;
             }
 
 
             .social {
                 width: 100%;
 
-                max-width: 280px;
+                max-width: 320px;
+            }
+
+        }
+
+
+        /* =====================================================
+           SMALL PHONES
+        ===================================================== */
+
+        @media (max-width: 430px) {
+
+            .feature-grid {
+                grid-template-columns: 1fr;
             }
 
 
-            .social-title {
-                font-size: 20px;
+            .hero-title {
+                font-size:
+                    48px;
+            }
+
+
+            .release-card::after {
+                display: none;
+            }
+
+
+            .section-heading {
+                font-size: 24px;
             }
 
         }
@@ -713,35 +1191,109 @@
 
         @media (prefers-reduced-motion: reduce) {
 
-            body::before,
-            body::after {
-                animation: none;
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+
+                transition: none !important;
             }
 
-            .logo,
-            .download,
-            .social {
-                transition: none;
-            }
         }
 
     </style>
+
 </head>
 
 
 <body>
 
-    <main class="container">
+
+<div class="page">
 
 
-        <!-- =================================================
-             HERO
-        ================================================= -->
+    <!-- =====================================================
+         TOP BAR
+    ===================================================== -->
 
-        <section class="hero">
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-dot"></div>
+
+            HUMBLE STUDIO TOOL
+
+        </div>
 
 
-            <!-- HUMBLE LOGO -->
+        <div class="nav-status">
+
+            ● V4.0 LIVE
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MARQUEE
+    ===================================================== -->
+
+    <div class="marquee">
+
+        <div class="marquee-track">
+
+            <span>
+                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
+            </span>
+
+            <span>
+                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
+            </span>
+
+            <span>
+                ⚡ HUMBLE STUDIO TOOL • ADOBE WORKFLOW • DISCORD RICH PRESENCE • STREAKS • COMMUNITY RANKING • ⚡
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="hero">
+
+
+        <div class="sticker one">
+            🔥
+        </div>
+
+
+        <div class="sticker two">
+            ✨
+        </div>
+
+
+        <div class="sticker three">
+            👀
+        </div>
+
+
+        <div class="sticker four">
+            💿
+        </div>
+
+
+
+        <!-- LOGO -->
+
+        <div class="logo-wrap">
 
             <img
                 class="logo"
@@ -749,123 +1301,352 @@
                 alt="Humble Studio Tool"
             >
 
+        </div>
 
-            <!-- BADGE -->
 
-            <div class="badge">
-                HUMBLE STUDIO TOOL
+
+        <!-- TAG -->
+
+        <div class="chaos-tag">
+
+            ⚠️ MADE FOR EDITORS WHO DON'T TOUCH GRASS ⚠️
+
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <h1 class="hero-title">
+
+            HUMBLE<br>
+            STUDIO<br>
+            TOOL
+
+        </h1>
+
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="hero-description">
+
+            Your Adobe workflow companion.
+            Track your editing time, keep your streak alive,
+            show what you're doing on Discord and climb the
+            Humble community rankings.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DOWNLOAD SECTION
+    ===================================================== -->
+
+    <section class="download-section">
+
+
+        <h2 class="section-heading">
+
+            📦 GET THE TOOL
+
+        </h2>
+
+
+
+        <!-- RELEASE -->
+
+        <div class="release-card">
+
+            <div class="release-label">
+
+                ⚠️ OFFICIAL RELEASE
+
             </div>
 
 
-            <!-- TITLE -->
+            <div class="release-title">
 
-            <h1>
-                Humble Studio Tool
-            </h1>
+                HUMBLE STUDIO<br>
+                TOOL V4.0
 
-
-            <!-- DESCRIPTION -->
-
-            <p class="subtitle">
-                Your Adobe workflow companion with Discord Rich Presence,
-                editing time, streaks and community progress.
-            </p>
-
-        </section>
-
-
-
-        <!-- =================================================
-             DOWNLOAD CARD
-        ================================================= -->
-
-        <section class="card">
-
-
-            <!-- VERSION -->
-
-            <div class="version">
-                VERSION 4.0 • LATEST RELEASE
             </div>
+
+
+            <div class="release-info">
+
+                WINDOWS + macOS • LATEST VERSION • FREE
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DOWNLOAD GRID -->
+
+        <div class="download-grid">
 
 
             <!-- WINDOWS -->
 
             <a
-                class="download windows"
+                class="download-box windows"
                 href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_Windows.zip"
             >
-                🪟 &nbsp; DOWNLOAD FOR WINDOWS
+
+                <div class="download-icon">
+
+                    🪟
+
+                </div>
+
+
+                <div class="download-name">
+
+                    Windows
+
+                </div>
+
+
+                <div class="download-description">
+
+                    Windows 10 / 11<br>
+                    Bundled Node.js<br>
+                    Ready to install
+
+                </div>
+
+
+                <div class="download-button">
+
+                    DOWNLOAD ZIP →
+
+                </div>
+
             </a>
 
 
-            <!-- macOS -->
+
+            <!-- MAC -->
 
             <a
-                class="download mac"
+                class="download-box mac"
                 href="https://github.com/humblelyy/HumbleStudioTool/releases/latest/download/HumbleStudioTool_v4_macOS.zip"
             >
-                🍎 &nbsp; DOWNLOAD FOR macOS
+
+                <div class="download-icon">
+
+                    🍎
+
+                </div>
+
+
+                <div class="download-name">
+
+                    macOS
+
+                </div>
+
+
+                <div class="download-description">
+
+                    macOS compatible<br>
+                    Adobe workflow support<br>
+                    Ready to install
+
+                </div>
+
+
+                <div class="download-button">
+
+                    DOWNLOAD ZIP →
+
+                </div>
+
             </a>
 
-
-            <!-- REQUIREMENTS -->
-
-            <div class="requirements">
-
-                AFTER EFFECTS / PREMIERE PRO
-
-                <br>
-
-                WINDOWS 10/11 • macOS
-
-                <br>
-
-                DISCORD DESKTOP REQUIRED
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             SOCIAL TITLE
-        ================================================= -->
-
-        <div class="social-title">
-
-            <span>
-                FIND HUMBLE
-            </span>
 
         </div>
 
 
 
         <!-- =================================================
-             SOCIAL LINKS
+             FEATURES
         ================================================= -->
 
-        <div class="social-links">
+        <section class="features">
 
 
-            <!-- =================================================
-                 INSTAGRAM
-            ================================================= -->
+            <h2 class="section-heading">
+
+                🔥 WHAT'S INSIDE
+
+            </h2>
+
+
+
+            <div class="feature-grid">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🟢
+                    </div>
+
+                    <div class="feature-title">
+                        Total Usage
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ⏱️
+                    </div>
+
+                    <div class="feature-title">
+                        Adobe Session Timer
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🔥
+                    </div>
+
+                    <div class="feature-title">
+                        Daily Streak
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🏆
+                    </div>
+
+                    <div class="feature-title">
+                        Community Ranking
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎬
+                    </div>
+
+                    <div class="feature-title">
+                        AE / Premiere Detection
+                    </div>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        🎮
+                    </div>
+
+                    <div class="feature-title">
+                        Discord Rich Presence
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             REQUIREMENTS
+        ================================================= -->
+
+        <div class="requirements">
+
+            <h3>
+
+                ⚠️ REQUIREMENTS
+
+            </h3>
+
+
+            <p>
+
+                Discord Desktop<br>
+
+                Adobe After Effects and/or Premiere Pro<br>
+
+                Windows 10/11 or macOS<br>
+
+                Internet connection for community features
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SOCIAL SECTION
+    ===================================================== -->
+
+    <section class="social-section">
+
+
+        <h2 class="social-heading">
+
+            FIND HUMBLE ONLINE
+
+        </h2>
+
+
+
+        <div class="social-grid">
+
+
+            <!-- INSTAGRAM -->
 
             <a
                 class="social instagram"
                 href="https://www.instagram.com/humble.edit/"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Humble Studio Tool Instagram"
             >
 
                 <svg
-                    class="social-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
                 >
 
                     <rect
@@ -874,28 +1655,24 @@
                         width="18"
                         height="18"
                         rx="5"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
                     />
 
                     <circle
                         cx="12"
                         cy="12"
                         r="4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
                     />
 
                     <circle
                         cx="17.5"
                         cy="6.5"
-                        r="1.3"
+                        r="1"
                         fill="currentColor"
+                        stroke="none"
                     />
 
                 </svg>
+
 
                 INSTAGRAM
 
@@ -903,56 +1680,61 @@
 
 
 
-            <!-- =================================================
-                 YOUTUBE
-            ================================================= -->
+            <!-- YOUTUBE -->
 
             <a
                 class="social youtube"
                 href="https://www.youtube.com/@humbleae"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Humble Studio Tool YouTube"
             >
 
                 <svg
-                    class="social-icon youtube-icon"
                     viewBox="0 0 24 24"
-                    aria-hidden="true"
+                    fill="currentColor"
                 >
 
                     <path
                         d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z"
-                        fill="currentColor"
                     />
 
                     <path
                         d="M9.6 15.6 15.8 12 9.6 8.4v7.2Z"
-                        fill="#ff3b30"
+                        fill="#ff3030"
                     />
 
                 </svg>
+
 
                 YOUTUBE
 
             </a>
 
+
         </div>
 
 
-
-        <!-- =================================================
-             FOOTER
-        ================================================= -->
-
-        <footer>
-
-            © 2026 HUMBLE STUDIO TOOL
-
-        </footer>
+    </section>
 
 
-    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        © 2026 HUMBLE STUDIO TOOL
+
+        <br>
+
+        BUILT FOR EDITORS. POWERED BY CHAOS. ⚡
+
+    </footer>
+
+
+</div>
+
 
 </body>
 </html>
