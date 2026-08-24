@@ -35,11 +35,13 @@
             color: #000000;
 
             overflow-x: hidden;
+
+            position: relative;
         }
 
 
         /* =====================================================
-           BACKGROUND DECORATION
+           ANIMATED BACKGROUND SHAPES
         ===================================================== */
 
         body::before {
@@ -94,6 +96,7 @@
                 floatBubble2 6s ease-in-out infinite;
         }
 
+
         @keyframes floatBubble {
 
             0% {
@@ -114,6 +117,7 @@
                     rotate(0deg);
             }
         }
+
 
         @keyframes floatBubble2 {
 
@@ -138,7 +142,7 @@
 
 
         /* =====================================================
-           MAIN
+           MAIN CONTAINER
         ===================================================== */
 
         .container {
@@ -258,7 +262,7 @@
 
 
         /* =====================================================
-           SUBTITLE
+           DESCRIPTION
         ===================================================== */
 
         .subtitle {
@@ -301,7 +305,7 @@
 
 
         /* =====================================================
-           CARD TOP STRIPE
+           CARD COLOR STRIPE
         ===================================================== */
 
         .card::before {
@@ -424,7 +428,7 @@
 
 
         /* =====================================================
-           MAC
+           macOS
         ===================================================== */
 
         .download.mac {
@@ -453,7 +457,7 @@
 
 
         /* =====================================================
-           SOCIAL LINKS
+           SOCIAL TITLE
         ===================================================== */
 
         .social-title {
@@ -469,6 +473,8 @@
         }
 
         .social-title span {
+            display: inline-block;
+
             background: #ffde00;
 
             padding:
@@ -482,10 +488,16 @@
         }
 
 
+        /* =====================================================
+           SOCIAL LINKS
+        ===================================================== */
+
         .social-links {
             display: flex;
 
             justify-content: center;
+
+            align-items: center;
 
             gap: 15px;
 
@@ -506,7 +518,7 @@
 
             gap: 9px;
 
-            min-width: 150px;
+            min-width: 160px;
 
             padding:
                 13px 18px;
@@ -543,7 +555,7 @@
                 translate(5px, 5px);
 
             box-shadow:
-                0 0 0 #000000;
+                0px 0px 0px #000000;
         }
 
 
@@ -553,7 +565,12 @@
 
         .instagram {
             background:
-                #ff4fb3;
+                linear-gradient(
+                    135deg,
+                    #ff4fb3 0%,
+                    #ff2d55 45%,
+                    #ff8a00 100%
+                );
         }
 
 
@@ -564,6 +581,25 @@
         .youtube {
             background:
                 #ff3b30;
+        }
+
+
+        /* =====================================================
+           SVG SOCIAL ICONS
+        ===================================================== */
+
+        .social-icon {
+            width: 23px;
+            height: 23px;
+
+            flex-shrink: 0;
+
+            display: block;
+        }
+
+        .youtube-icon {
+            width: 25px;
+            height: 25px;
         }
 
 
@@ -596,6 +632,7 @@
                     35px 15px 30px;
             }
 
+
             .logo {
                 width: 82px;
                 height: 82px;
@@ -603,12 +640,14 @@
                 margin-bottom: 20px;
             }
 
+
             .badge {
                 font-size: 10px;
 
                 padding:
                     7px 10px;
             }
+
 
             h1 {
                 font-size:
@@ -621,11 +660,13 @@
                     4px 4px 0px #ff4fb3;
             }
 
+
             .subtitle {
                 font-size: 15px;
 
                 margin-bottom: 30px;
             }
+
 
             .card {
                 padding:
@@ -635,11 +676,13 @@
                     6px 6px 0px #000000;
             }
 
+
             .download {
                 font-size: 14px;
 
                 min-height: 54px;
             }
+
 
             .social-links {
                 flex-direction: column;
@@ -649,15 +692,18 @@
                 gap: 12px;
             }
 
+
             .social {
                 width: 100%;
 
                 max-width: 280px;
             }
 
+
             .social-title {
                 font-size: 20px;
             }
+
         }
 
 
@@ -694,19 +740,31 @@
 
         <section class="hero">
 
+
+            <!-- HUMBLE LOGO -->
+
             <img
                 class="logo"
                 src="logo.jpg"
                 alt="Humble Studio Tool"
             >
 
+
+            <!-- BADGE -->
+
             <div class="badge">
                 HUMBLE STUDIO TOOL
             </div>
 
+
+            <!-- TITLE -->
+
             <h1>
                 Humble Studio Tool
             </h1>
+
+
+            <!-- DESCRIPTION -->
 
             <p class="subtitle">
                 Your Adobe workflow companion with Discord Rich Presence,
@@ -723,6 +781,9 @@
 
         <section class="card">
 
+
+            <!-- VERSION -->
+
             <div class="version">
                 VERSION 4.0 • LATEST RELEASE
             </div>
@@ -738,7 +799,7 @@
             </a>
 
 
-            <!-- MACOS -->
+            <!-- macOS -->
 
             <a
                 class="download mac"
@@ -753,9 +814,11 @@
             <div class="requirements">
 
                 AFTER EFFECTS / PREMIERE PRO
+
                 <br>
 
                 WINDOWS 10/11 • macOS
+
                 <br>
 
                 DISCORD DESKTOP REQUIRED
@@ -767,42 +830,112 @@
 
 
         <!-- =================================================
-             SOCIAL
+             SOCIAL TITLE
         ================================================= -->
 
         <div class="social-title">
+
             <span>
                 FIND HUMBLE
             </span>
+
         </div>
 
+
+
+        <!-- =================================================
+             SOCIAL LINKS
+        ================================================= -->
 
         <div class="social-links">
 
 
-            <!-- INSTAGRAM -->
+            <!-- =================================================
+                 INSTAGRAM
+            ================================================= -->
 
             <a
                 class="social instagram"
                 href="https://www.instagram.com/humble.edit/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Humble Studio Tool Instagram"
             >
-                📸 INSTAGRAM
+
+                <svg
+                    class="social-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <rect
+                        x="3"
+                        y="3"
+                        width="18"
+                        height="18"
+                        rx="5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    />
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    />
+
+                    <circle
+                        cx="17.5"
+                        cy="6.5"
+                        r="1.3"
+                        fill="currentColor"
+                    />
+
+                </svg>
+
+                INSTAGRAM
+
             </a>
 
 
-            <!-- YOUTUBE -->
+
+            <!-- =================================================
+                 YOUTUBE
+            ================================================= -->
 
             <a
                 class="social youtube"
                 href="https://www.youtube.com/@humbleae"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Humble Studio Tool YouTube"
             >
-                ▶ YOUTUBE
-            </a>
 
+                <svg
+                    class="social-icon youtube-icon"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8Z"
+                        fill="currentColor"
+                    />
+
+                    <path
+                        d="M9.6 15.6 15.8 12 9.6 8.4v7.2Z"
+                        fill="#ff3b30"
+                    />
+
+                </svg>
+
+                YOUTUBE
+
+            </a>
 
         </div>
 
@@ -813,7 +946,9 @@
         ================================================= -->
 
         <footer>
+
             © 2026 HUMBLE STUDIO TOOL
+
         </footer>
 
 
