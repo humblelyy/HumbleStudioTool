@@ -323,47 +323,41 @@ a {
     white-space: nowrap;
 }
 
-.marquee-track {
+ .marquee-track {
     display: flex;
-
     width: max-content;
-
     will-change: transform;
-
-    animation: infiniteMarquee 24s linear infinite;
+    animation:
+        infiniteMarquee
+        var(--marquee-speed, 24s)
+        linear
+        infinite;
+    transform: translate3d(0, 0, 0);
 }
 
 .marquee-group {
     display: flex;
-
-    flex-shrink: 0;
-
+    flex: 0 0 auto;
     align-items: center;
-
     gap: 20px;
-
     padding-right: 20px;
 }
 
-/*
-   IMPORTANT:
-   Two identical groups make the marquee
-   loop without an empty gap.
-*/
-
 @keyframes infiniteMarquee {
-
     from {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
-
     to {
-        transform: translateX(-50%);
+        transform: translate3d(
+            var(--marquee-distance, -1000px),
+            0,
+            0
+        );
     }
 }
 
 .marquee:hover .marquee-track {
-    animation-play-state: paused;
+    animation-play-state: running;
 }
 
 
@@ -1490,61 +1484,79 @@ h1 {
         3px 3px 0 #ffce5c;
 }
 
-.socials {
-    display: flex;
-
-    justify-content: center;
-
+ .socials {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
     gap: 18px;
-
-    flex-wrap: wrap;
+    max-width: 920px;
+    margin: 0 auto;
 }
 
 .social {
+    min-height: 72px;
     display: flex;
-
     align-items: center;
-
-    gap: 10px;
-
+    justify-content: center;
+    gap: 12px;
     background: #fff;
-
     border: 4px solid #000;
-
-    box-shadow:
-        5px 5px 0 #000;
-
-    padding: 13px 20px;
-
+    box-shadow: 6px 6px 0 #000;
+    padding: 14px 18px;
     text-decoration: none;
-
     font-weight: 1000;
-
+    font-size: 16px;
     transition:
         transform .15s ease,
         box-shadow .15s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.social::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 180px;
+    top: -55px;
+    left: -120px;
+    background: rgba(255,255,255,.55);
+    transform: rotate(20deg);
+    transition: left .45s ease;
+    pointer-events: none;
+}
+
+.social:hover::after {
+    left: calc(100% + 40px);
 }
 
 .social:hover {
     transform:
-        translate(3px, 3px)
-        rotate(-2deg);
+        translate(4px, 4px)
+        rotate(-1.5deg);
+    box-shadow: 2px 2px 0 #000;
+}
 
-    box-shadow:
-        2px 2px 0 #000;
+.social:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0 0 0 #000;
 }
 
 .social svg {
-    width: 24px;
-    height: 24px;
+    width: 25px;
+    height: 25px;
+    flex: 0 0 25px;
 }
 
-.youtube {
-    background: #ff6b6b;
-}
+.youtube { background: #ff6b6b; }
+.instagram { background: #ff71ce; }
+.email { background: #fff; }
+.discord { background: #5865F2; }
+.spotify { background: #1DB954; }
+.github { background: #4ecdc4; }
 
-.instagram {
-    background: #ff71ce;
+.social-light-icon {
+    fill: #fff;
 }
 
 
@@ -1941,25 +1953,43 @@ footer {
 
     .social-section {
         padding:
-            10px 0 45px;
+            25px 0 50px;
     }
 
     .social-title {
         font-size: 25px;
+        margin-bottom: 20px;
     }
 
     .socials {
-        flex-direction: column;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
 
-        gap: 13px;
+        gap: 12px;
+
+        width: 100%;
     }
 
     .social {
         width: 100%;
 
-        justify-content: center;
+        min-height: 62px;
 
-        padding: 13px;
+        padding: 12px 8px;
+
+        font-size: 12px;
+
+        gap: 7px;
+
+        box-shadow:
+            4px 4px 0 #000;
+    }
+
+    .social svg {
+        width: 21px;
+        height: 21px;
+
+        flex-basis: 21px;
     }
 
 
@@ -2042,11 +2072,9 @@ footer {
      INFINITE MARQUEE
 ======================================================== -->
 
-<div class="marquee">
+<div class="marquee" aria-label="Humble Studio Tool updates">
 
     <div class="marquee-track">
-
-        <!-- GROUP 1 -->
 
         <div class="marquee-group">
 
@@ -2063,10 +2091,7 @@ footer {
 
         </div>
 
-
-        <!-- GROUP 2 - EXACT DUPLICATE -->
-
-        <div class="marquee-group">
+        <div class="marquee-group" aria-hidden="true">
 
             <span>⚡ HUMBLE STUDIO TOOL</span>
             <span>•</span>
@@ -2082,6 +2107,8 @@ footer {
         </div>
 
     </div>
+
+</div>
 
 </div>
 
@@ -2667,103 +2694,97 @@ footer {
     <div class="container">
 
         <h2 class="social-title">
-
             👀 FOLLOW HUMBLE
-
         </h2>
-
 
         <div class="socials">
 
-
             <!-- YOUTUBE -->
-
             <a
                 class="social youtube"
                 href="https://www.youtube.com/@humbleae"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Humble on YouTube"
             >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    aria-hidden="true"
-                >
-
-                    <path d="
-                        M23.5 6.2
-                        a3 3 0 0 0-2.1-2.1
-                        C19.5 3.5 12 3.5 12 3.5
-                        s-7.5 0-9.4.6
-                        A3 3 0 0 0 .5 6.2
-                        C0 8.1 0 12 0 12
-                        s0 3.9.5 5.8
-                        a3 3 0 0 0 2.1 2.1
-                        c1.9.6 9.4.6 9.4.6
-                        s7.5 0 9.4-.6
-                        a3 3 0 0 0 2.1-2.1
-                        C24 15.9 24 12 24 12
-                        s0-3.9-.5-5.8z
-
-                        M9.6 15.5
-                        v-7
-                        l6 3.5
-                        -6 3.5z
-                    "/>
-
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.6 15.5v-7l6 3.5-6 3.5z"/>
                 </svg>
-
                 YouTube
-
             </a>
 
-
             <!-- INSTAGRAM -->
-
             <a
                 class="social instagram"
                 href="https://www.instagram.com/humble.edit/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Humble on Instagram"
             >
-
-                <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    aria-hidden="true"
-                >
-
-                    <rect
-                        x="3"
-                        y="3"
-                        width="18"
-                        height="18"
-                        rx="5"
-                    />
-
-                    <circle
-                        cx="12"
-                        cy="12"
-                        r="4"
-                    />
-
-                    <circle
-                        cx="17.5"
-                        cy="6.5"
-                        r="1"
-                        fill="currentColor"
-                        stroke="none"
-                    />
-
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
                 </svg>
-
                 Instagram
-
             </a>
 
+            <!-- EMAIL -->
+            <a
+                class="social email"
+                href="mailto:humbleae620@gmail.com"
+                aria-label="Email Humble"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#EA4335" d="M3 5h18v14H3z"/>
+                    <path fill="#fff" d="M3 5l9 7 9-7v3l-9 7-9-7z"/>
+                    <path fill="#4285F4" d="M3 5h3.4L3 7.65zM21 5h-3.4L21 7.65z"/>
+                </svg>
+                Email
+            </a>
+
+            <!-- DISCORD -->
+            <a
+                class="social discord"
+                href="https://discord.gg/X6aufPCjf7"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Join Humble Discord"
+            >
+                <svg viewBox="0 0 24 24" fill="currentColor" class="social-light-icon" aria-hidden="true">
+                    <path d="M19.54 5.13A16.2 16.2 0 0 0 15.5 3.9l-.5 1.02a14.7 14.7 0 0 0-6 0L8.5 3.9a16.2 16.2 0 0 0-4.04 1.23C1.9 9.04 1.2 12.85 1.55 16.6a16.5 16.5 0 0 0 4.95 2.5l1.2-1.65a10.3 10.3 0 0 1-1.88-.9l.46-.36c3.64 1.68 7.58 1.68 11.18 0l.46.36c-.6.35-1.23.65-1.88.9l1.2 1.65a16.5 16.5 0 0 0 4.95-2.5c.41-4.35-.7-8.12-2.65-11.47zM8.7 14.38c-1.08 0-1.97-1-1.97-2.22s.87-2.22 1.97-2.22 1.98 1 1.97 2.22-.88 2.22-1.97 2.22zm6.6 0c-1.08 0-1.97-1-1.97-2.22s.87-2.22 1.97-2.22 1.98 1 1.97 2.22-.88 2.22-1.97 2.22z"/>
+                </svg>
+                Discord
+            </a>
+
+            <!-- SPOTIFY -->
+            <a
+                class="social spotify"
+                href="https://open.spotify.com/user/31yb6y2acu2gaqniklh7pbvfpvcy"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Humble on Spotify"
+            >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path fill="#000" d="M7.3 9.2c3.1-.9 6.9-.7 9.6.6.4.2.6.7.4 1.1-.2.4-.7.6-1.1.4-2.4-1.1-5.7-1.3-8.5-.5-.5.1-.9-.1-1-.6-.1-.4.2-.9.6-1zm.3 3c2.6-.7 5.7-.5 7.9.6.4.2.5.6.3 1-.2.4-.6.5-1 .3-1.9-.9-4.6-1.1-6.9-.5-.4.1-.8-.1-.9-.5-.1-.4.2-.8.6-.9zm.3 2.7c2.1-.5 4.4-.4 6.2.5.3.2.5.5.3.8-.2.3-.5.5-.8.3-1.5-.7-3.5-.8-5.3-.4-.3.1-.7-.1-.8-.5-.1-.3.1-.6.4-.7z"/>
+                </svg>
+                Spotify
+            </a>
+
+            <!-- GITHUB PROFILE -->
+            <a
+                class="social github"
+                href="https://github.com/humblelyy"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Humble on GitHub"
+            >
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M12 .7A11.3 11.3 0 0 0 8.42 22.9c.57.1.78-.25.78-.55v-2.16c-3.17.69-3.84-1.34-3.84-1.34-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.67 1.25 3.32.96.1-.74.4-1.25.73-1.54-2.53-.29-5.19-1.27-5.19-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.03 0 0 .96-.31 3.12 1.17a10.8 10.8 0 0 1 5.68 0c2.16-1.48 3.12-1.17 3.12-1.17.62 1.58.23 2.74.11 3.03.73.8 1.18 1.82 1.18 3.07 0 4.4-2.67 5.36-5.2 5.65.41.36.77 1.06.77 2.14v3.17c0 .31.2.66.79.55A11.3 11.3 0 0 0 12 .7z"/>
+                </svg>
+                GitHub
+            </a>
 
         </div>
 
@@ -2947,6 +2968,59 @@ if (
     });
 
 }
+
+
+/*
+=========================================================
+SEAMLESS MARQUEE
+=========================================================
+*/
+
+const marquee = document.querySelector(".marquee");
+const marqueeTrack = document.querySelector(".marquee-track");
+const marqueeGroups = document.querySelectorAll(".marquee-group");
+
+function updateMarquee() {
+
+    if (!marqueeTrack || marqueeGroups.length < 2) {
+        return;
+    }
+
+    const firstGroupWidth =
+        marqueeGroups[0].getBoundingClientRect().width;
+
+    marqueeTrack.style.setProperty(
+        "--marquee-distance",
+        `${-firstGroupWidth}px`
+    );
+
+    /*
+       Keep the same visual speed on desktop and mobile.
+       Larger screens naturally get a slightly longer duration.
+    */
+
+    const pixelsPerSecond =
+        window.innerWidth <= 600 ? 75 : 95;
+
+    const duration =
+        Math.max(
+            12,
+            firstGroupWidth / pixelsPerSecond
+        );
+
+    marqueeTrack.style.setProperty(
+        "--marquee-speed",
+        `${duration}s`
+    );
+}
+
+updateMarquee();
+
+window.addEventListener(
+    "resize",
+    updateMarquee,
+    { passive: true }
+);
 
 
 /*
