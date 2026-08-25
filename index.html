@@ -2,15 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Humble Studio Tool</title>
 
     <style>
-
         /* =========================================================
            RESET
         ========================================================= */
@@ -33,15 +29,33 @@
                 Helvetica,
                 sans-serif;
 
-            background: #fff000;
+            background: #fffbea;
 
-            color: #000;
+            color: #111;
 
             overflow-x: hidden;
         }
 
         a {
             color: inherit;
+        }
+
+
+        /* =========================================================
+           COLOR SYSTEM
+        ========================================================= */
+
+        :root {
+            --pink: #ff71ce;
+            --yellow: #ffce5c;
+            --teal: #86ccca;
+            --blue: #6a7bb4;
+            --coral: #ff6b6b;
+            --green: #4ecdc4;
+
+            --cream: #fffbea;
+            --black: #000;
+            --white: #fff;
         }
 
 
@@ -53,56 +67,210 @@
             content: "";
 
             position: fixed;
-
             inset: 0;
 
             pointer-events: none;
 
-            z-index: -10;
+            z-index: -20;
 
             background:
                 radial-gradient(
-                    circle at 15% 20%,
-                    rgba(255, 0, 230, 0.18),
+                    circle at 10% 20%,
+                    rgba(255, 113, 206, 0.20),
                     transparent 18%
                 ),
                 radial-gradient(
-                    circle at 85% 35%,
-                    rgba(0, 255, 255, 0.18),
+                    circle at 90% 25%,
+                    rgba(255, 206, 92, 0.20),
                     transparent 20%
                 ),
                 radial-gradient(
-                    circle at 50% 90%,
-                    rgba(0, 255, 60, 0.15),
+                    circle at 20% 85%,
+                    rgba(134, 204, 202, 0.18),
+                    transparent 20%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(106, 123, 180, 0.15),
                     transparent 22%
                 );
 
-            animation: backgroundMove 8s ease-in-out infinite alternate;
+            animation:
+                backgroundFloat
+                10s
+                ease-in-out
+                infinite
+                alternate;
         }
 
-        @keyframes backgroundMove {
+        @keyframes backgroundFloat {
 
             0% {
                 transform: scale(1);
             }
 
             100% {
-                transform: scale(1.12);
+                transform: scale(1.08);
             }
         }
 
 
         /* =========================================================
-           TOP HEADER
+           MEMPHIS BACKGROUND SHAPES
+        ========================================================= */
+
+        .shape {
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: -5;
+
+            opacity: 0.95;
+        }
+
+        .shape.circle {
+            width: 110px;
+            height: 110px;
+
+            border-radius: 50%;
+
+            background: var(--pink);
+
+            border: 4px solid var(--black);
+
+            top: 120px;
+            left: 30px;
+
+            animation:
+                shapeFloat
+                5s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        .shape.diamond {
+            width: 85px;
+            height: 85px;
+
+            background: var(--yellow);
+
+            border: 4px solid var(--black);
+
+            transform: rotate(45deg);
+
+            top: 180px;
+            right: 45px;
+
+            animation:
+                diamondFloat
+                6s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        .shape.square {
+            width: 75px;
+            height: 75px;
+
+            background: var(--teal);
+
+            border: 4px solid var(--black);
+
+            bottom: 160px;
+            left: 50px;
+
+            transform: rotate(-12deg);
+
+            animation:
+                shapeFloat
+                4s
+                ease-in-out
+                infinite
+                alternate;
+        }
+
+        .shape.pattern {
+            width: 70px;
+            height: 140px;
+
+            right: 35px;
+            bottom: 130px;
+
+            border: 4px solid #000;
+
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    #000 0,
+                    #000 6px,
+                    transparent 6px,
+                    transparent 12px
+                );
+
+            animation:
+                patternMove
+                5s
+                linear
+                infinite;
+        }
+
+        @keyframes shapeFloat {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(-8deg);
+            }
+
+            100% {
+                transform:
+                    translateY(-18px)
+                    rotate(8deg);
+            }
+        }
+
+        @keyframes diamondFloat {
+
+            0% {
+                transform:
+                    translateY(0)
+                    rotate(45deg);
+            }
+
+            100% {
+                transform:
+                    translateY(-16px)
+                    rotate(55deg);
+            }
+        }
+
+        @keyframes patternMove {
+
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 20px 20px;
+            }
+        }
+
+
+        /* =========================================================
+           TOP BAR
         ========================================================= */
 
         .topbar {
+            width: 100%;
 
-            min-height: 58px;
+            min-height: 68px;
 
-            background: #fffde9;
+            background: var(--cream);
 
-            border-bottom: 3px solid #000;
+            border-bottom: 4px solid var(--black);
 
             display: flex;
 
@@ -110,9 +278,7 @@
 
             justify-content: space-between;
 
-            padding: 10px 28px;
-
-            gap: 20px;
+            padding: 12px 32px;
 
             position: relative;
 
@@ -120,14 +286,13 @@
         }
 
         .brand {
-
             display: flex;
 
             align-items: center;
 
             gap: 12px;
 
-            font-size: 18px;
+            font-size: 17px;
 
             font-weight: 1000;
 
@@ -135,34 +300,30 @@
         }
 
         .brand-mark {
+            width: 22px;
+            height: 22px;
 
-            width: 20px;
-            height: 20px;
+            background: var(--pink);
 
-            background: #ff00e6;
+            border: 3px solid var(--black);
 
-            border: 3px solid #000;
+            box-shadow: 3px 3px 0 var(--black);
 
-            transform: rotate(-5deg);
-
-            box-shadow: 3px 3px 0 #000;
-
-            flex-shrink: 0;
+            transform: rotate(-7deg);
         }
 
         .version-badge {
+            background: var(--yellow);
 
-            background: #00eaff;
+            border: 3px solid var(--black);
 
-            border: 3px solid #000;
-
-            padding: 7px 13px;
+            padding: 8px 14px;
 
             font-size: 13px;
 
             font-weight: 1000;
 
-            box-shadow: 4px 4px 0 #000;
+            box-shadow: 4px 4px 0 var(--black);
 
             transform: rotate(2deg);
         }
@@ -173,40 +334,41 @@
         ========================================================= */
 
         .marquee {
-
             width: 100%;
 
             overflow: hidden;
 
-            background: #000;
+            background: var(--black);
 
-            color: #fff000;
+            color: var(--yellow);
 
-            border-bottom: 3px solid #000;
+            border-bottom: 4px solid var(--black);
 
-            padding: 9px 0;
+            padding: 10px 0;
 
             white-space: nowrap;
         }
 
         .marquee-track {
-
             display: inline-flex;
 
             width: max-content;
 
-            animation: marquee 18s linear infinite;
+            animation:
+                marquee
+                20s
+                linear
+                infinite;
         }
 
         .marquee-content {
-
             font-size: 15px;
 
             font-weight: 1000;
 
             letter-spacing: 1px;
 
-            padding-right: 35px;
+            padding-right: 40px;
         }
 
         @keyframes marquee {
@@ -226,14 +388,13 @@
         ========================================================= */
 
         main {
-
             width: 100%;
 
             max-width: 1100px;
 
             margin: 0 auto;
 
-            padding: 26px 24px 60px;
+            padding: 40px 24px 70px;
         }
 
 
@@ -242,14 +403,13 @@
         ========================================================= */
 
         .hero {
-
             position: relative;
 
             max-width: 900px;
 
             margin: 0 auto;
 
-            padding: 10px 10px 24px;
+            padding: 10px 10px 35px;
         }
 
 
@@ -258,79 +418,70 @@
         ========================================================= */
 
         .sticker {
-
             position: absolute;
 
             pointer-events: none;
 
             user-select: none;
 
-            z-index: 1;
+            z-index: 2;
 
             animation:
-                floatSticker 3s ease-in-out infinite alternate;
+                stickerFloat
+                3.5s
+                ease-in-out
+                infinite
+                alternate;
         }
 
         .sticker.fire {
+            top: 20px;
+            left: -30px;
 
-            top: 0;
-
-            left: -25px;
-
-            font-size: 64px;
+            font-size: 65px;
 
             transform: rotate(-12deg);
         }
 
         .sticker.star {
+            top: 90px;
+            right: -30px;
 
-            top: 65px;
-
-            right: -15px;
-
-            font-size: 52px;
-
-            transform: rotate(8deg);
+            font-size: 55px;
 
             animation-delay: .6s;
         }
 
         .sticker.eyes {
-
-            bottom: 105px;
-
-            left: 15px;
+            bottom: 120px;
+            left: 30px;
 
             font-size: 42px;
-
-            transform: rotate(-8deg);
 
             animation-delay: 1s;
         }
 
         .sticker.disc {
-
             bottom: 90px;
+            right: 40px;
 
-            right: 35px;
-
-            font-size: 44px;
+            font-size: 45px;
 
             animation-delay: 1.4s;
         }
 
-        @keyframes floatSticker {
+        @keyframes stickerFloat {
 
             0% {
                 transform:
                     translateY(0)
-                    rotate(-5deg);
+                    rotate(-6deg);
             }
 
             100% {
                 transform:
-                    translateY(-12px)
-                    rotate(6deg);
+                    translateY(-14px)
+                    rotate(7deg);
             }
         }
 
@@ -340,41 +491,38 @@
         ========================================================= */
 
         .logo-wrap {
+            width: 110px;
+            height: 110px;
 
-            width: 105px;
+            background: var(--black);
 
-            height: 105px;
+            border: 4px solid var(--black);
 
-            background: #000;
+            box-shadow: 7px 7px 0 var(--black);
 
-            border: 3px solid #000;
+            margin: 8px 0 25px;
 
-            box-shadow: 6px 6px 0 #000;
-
-            margin: 4px 0 22px;
-
-            transform: rotate(-4deg);
+            transform: rotate(-5deg);
 
             position: relative;
 
             z-index: 5;
 
             animation:
-                logoJitter 5s infinite;
+                logoJitter
+                5s
+                infinite;
         }
 
         .logo-wrap img {
-
             width: 100%;
-
             height: 100%;
 
             object-fit: cover;
 
             display: block;
 
-            border: 3px solid #fff;
-
+            border: 3px solid white;
         }
 
         @keyframes logoJitter {
@@ -382,36 +530,39 @@
             0%,
             92%,
             100% {
-                transform: rotate(-4deg);
+                transform: rotate(-5deg);
             }
 
             94% {
-                transform: rotate(-2deg) translate(2px, -1px);
+                transform:
+                    rotate(-2deg)
+                    translate(2px, -1px);
             }
 
             96% {
-                transform: rotate(-6deg) translate(-2px, 1px);
+                transform:
+                    rotate(-7deg)
+                    translate(-2px, 1px);
             }
         }
 
 
         /* =========================================================
-           PINK BADGE
+           HERO BADGE
         ========================================================= */
 
         .hero-badge {
-
             display: inline-block;
 
-            background: #ff00e6;
+            background: var(--pink);
 
-            color: #fff;
+            color: white;
 
-            border: 3px solid #000;
+            border: 4px solid var(--black);
 
-            box-shadow: 5px 5px 0 #000;
+            box-shadow: 6px 6px 0 var(--black);
 
-            padding: 10px 16px;
+            padding: 11px 17px;
 
             font-size: 14px;
 
@@ -421,13 +572,16 @@
 
             transform: rotate(-1.5deg);
 
-            margin-bottom: 26px;
+            margin-bottom: 30px;
 
             position: relative;
 
             z-index: 5;
 
-            animation: badgeJitter 4s infinite;
+            animation:
+                badgeJitter
+                4s
+                infinite;
         }
 
         @keyframes badgeJitter {
@@ -453,18 +607,18 @@
         ========================================================= */
 
         .main-title {
-
             position: relative;
 
             z-index: 5;
 
-            font-size: clamp(
-                64px,
-                10vw,
-                125px
-            );
+            font-size:
+                clamp(
+                    65px,
+                    10vw,
+                    125px
+                );
 
-            line-height: .80;
+            line-height: .82;
 
             letter-spacing: -7px;
 
@@ -472,16 +626,19 @@
 
             text-transform: uppercase;
 
-            max-width: 700px;
+            max-width: 800px;
 
-            margin-bottom: 25px;
+            margin-bottom: 30px;
 
-            color: #000;
+            color: var(--black);
 
             text-shadow:
-                7px 7px 0 #ff00e6;
+                8px 8px 0 var(--pink);
 
-            animation: titleJitter 5s infinite;
+            animation:
+                titleJitter
+                5s
+                infinite;
         }
 
         @keyframes titleJitter {
@@ -511,20 +668,19 @@
         ========================================================= */
 
         .description {
-
             position: relative;
 
             z-index: 5;
 
-            max-width: 650px;
+            max-width: 670px;
 
             font-size: 19px;
 
-            line-height: 1.4;
+            line-height: 1.45;
 
             font-weight: 900;
 
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
 
@@ -533,7 +689,6 @@
         ========================================================= */
 
         .get-tool {
-
             display: inline-flex;
 
             align-items: center;
@@ -542,15 +697,15 @@
 
             gap: 12px;
 
-            background: #fff;
+            background: white;
 
-            color: #000;
+            color: black;
 
-            border: 4px solid #000;
+            border: 4px solid black;
 
-            box-shadow: 7px 7px 0 #000;
+            box-shadow: 8px 8px 0 black;
 
-            padding: 15px 28px;
+            padding: 16px 30px;
 
             font-size: 22px;
 
@@ -572,47 +727,43 @@
         }
 
         .get-tool:hover {
-
             transform:
                 translate(-3px, -3px)
                 rotate(1deg);
 
             box-shadow:
-                10px 10px 0 #000;
+                11px 11px 0 black;
         }
 
         .get-tool:active {
-
             transform:
-                translate(5px, 5px);
+                translate(6px, 6px);
 
             box-shadow:
-                2px 2px 0 #000;
+                2px 2px 0 black;
         }
 
 
         /* =========================================================
-           SECTION
+           SECTIONS
         ========================================================= */
 
         .section {
-
-            margin-top: 38px;
+            margin-top: 55px;
 
             position: relative;
         }
 
         .section-title {
-
             display: inline-block;
 
-            background: #000;
+            background: black;
 
-            color: #fff000;
+            color: var(--yellow);
 
-            border: 3px solid #000;
+            border: 4px solid black;
 
-            padding: 8px 14px;
+            padding: 9px 15px;
 
             font-size: 23px;
 
@@ -620,9 +771,11 @@
 
             text-transform: uppercase;
 
-            margin-bottom: 18px;
+            margin-bottom: 22px;
 
             transform: rotate(-1deg);
+
+            box-shadow: 5px 5px 0 var(--pink);
         }
 
 
@@ -631,39 +784,61 @@
         ========================================================= */
 
         .download-card {
+            background: var(--pink);
 
-            background: #ff00e6;
+            border: 4px solid black;
 
-            border: 4px solid #000;
+            box-shadow: 9px 9px 0 black;
 
-            box-shadow: 8px 8px 0 #000;
+            padding: 28px;
 
-            padding: 24px;
-
-            transform: rotate(.4deg);
+            transform: rotate(.5deg);
 
             position: relative;
 
             overflow: hidden;
         }
 
-        .download-card::after {
-
-            content: "DOWNLOAD";
+        .download-card::before {
+            content: "";
 
             position: absolute;
 
-            right: -30px;
+            width: 180px;
+            height: 180px;
 
-            top: 15px;
+            right: -80px;
+            bottom: -100px;
 
-            background: #00ff48;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    black 0,
+                    black 6px,
+                    transparent 6px,
+                    transparent 12px
+                );
 
-            color: #000;
+            opacity: .2;
 
-            border: 3px solid #000;
+            pointer-events: none;
+        }
 
-            padding: 7px 25px;
+        .download-card::after {
+            content: "LATEST";
+
+            position: absolute;
+
+            right: -35px;
+            top: 18px;
+
+            background: var(--green);
+
+            color: black;
+
+            border: 3px solid black;
+
+            padding: 7px 30px;
 
             font-size: 12px;
 
@@ -673,12 +848,11 @@
         }
 
         .version {
-
-            font-size: 16px;
+            font-size: 17px;
 
             font-weight: 1000;
 
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
 
@@ -687,32 +861,30 @@
         ========================================================= */
 
         .downloads {
-
             display: grid;
 
             grid-template-columns:
                 repeat(2, 1fr);
 
-            gap: 16px;
+            gap: 18px;
         }
 
         .download {
-
             display: flex;
 
             align-items: center;
 
             justify-content: center;
 
-            min-height: 58px;
+            min-height: 62px;
 
-            background: #fff;
+            background: white;
 
-            color: #000;
+            color: black;
 
-            border: 4px solid #000;
+            border: 4px solid black;
 
-            box-shadow: 5px 5px 0 #000;
+            box-shadow: 6px 6px 0 black;
 
             text-decoration: none;
 
@@ -726,21 +898,20 @@
         }
 
         .download:hover {
-
             transform:
-                translate(-3px, -3px);
+                translate(-3px, -3px)
+                rotate(-1deg);
 
             box-shadow:
-                8px 8px 0 #000;
+                9px 9px 0 black;
         }
 
         .download:active {
-
             transform:
                 translate(4px, 4px);
 
             box-shadow:
-                1px 1px 0 #000;
+                2px 2px 0 black;
         }
 
 
@@ -749,24 +920,22 @@
         ========================================================= */
 
         .features {
-
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
-            gap: 16px;
+            gap: 18px;
         }
 
         .feature {
+            min-height: 155px;
 
-            min-height: 150px;
+            border: 4px solid black;
 
-            border: 4px solid #000;
+            box-shadow: 7px 7px 0 black;
 
-            box-shadow: 6px 6px 0 #000;
-
-            padding: 20px;
+            padding: 21px;
 
             display: flex;
 
@@ -782,68 +951,105 @@
                 );
 
             transition:
-                transform .2s ease;
+                transform .2s ease,
+                box-shadow .2s ease;
         }
 
         .feature:hover {
-
             transform:
-                translateY(-6px)
+                translateY(-7px)
                 rotate(0deg);
+
+            box-shadow:
+                10px 10px 0 black;
         }
 
         .feature:nth-child(1) {
+            background: var(--pink);
 
-            background: #00eaff;
-
-            --rotation: -1deg;
+            --rotation: -1.5deg;
         }
 
         .feature:nth-child(2) {
-
-            background: #ff6565;
+            background: var(--yellow);
 
             --rotation: 1.5deg;
         }
 
         .feature:nth-child(3) {
-
-            background: #00ff32;
+            background: var(--teal);
 
             --rotation: -1deg;
         }
 
         .feature:nth-child(4) {
+            background: var(--blue);
 
-            background: #ff8a00;
+            color: white;
 
-            --rotation: 1deg;
+            --rotation: 1.2deg;
         }
 
         .feature:nth-child(5) {
+            background: var(--coral);
 
-            background: #b000ff;
-
-            color: #fff;
-
-            --rotation: -1deg;
+            --rotation: -1.5deg;
         }
 
         .feature:nth-child(6) {
-
-            background: #fff;
+            background: var(--green);
 
             --rotation: 1deg;
         }
 
         .feature-icon {
-
-            font-size: 36px;
+            font-size: 38px;
         }
 
         .feature-name {
-
             font-size: 18px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           MEMPHIS PATTERN BLOCK
+        ========================================================= */
+
+        .pattern-block {
+            margin-top: 45px;
+
+            padding: 22px;
+
+            background:
+                repeating-linear-gradient(
+                    -45deg,
+                    var(--blue) 0,
+                    var(--blue) 8px,
+                    var(--cream) 8px,
+                    var(--cream) 16px
+                );
+
+            border: 4px solid black;
+
+            box-shadow: 8px 8px 0 black;
+
+            transform: rotate(-.7deg);
+        }
+
+        .pattern-inner {
+            background: var(--yellow);
+
+            border: 4px solid black;
+
+            padding: 25px;
+
+            text-align: center;
+
+            font-size: 22px;
+
+            font-weight: 1000;
 
             text-transform: uppercase;
         }
@@ -854,36 +1060,32 @@
         ========================================================= */
 
         .social-section {
-
-            margin-top: 45px;
+            margin-top: 55px;
 
             text-align: center;
         }
 
         .social-title {
-
-            font-size: 20px;
+            font-size: 21px;
 
             font-weight: 1000;
 
             text-transform: uppercase;
 
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .socials {
-
             display: flex;
 
             justify-content: center;
 
-            gap: 16px;
+            gap: 18px;
 
             flex-wrap: wrap;
         }
 
         .social {
-
             display: inline-flex;
 
             align-items: center;
@@ -892,21 +1094,19 @@
 
             gap: 10px;
 
-            min-width: 180px;
+            min-width: 190px;
 
-            padding: 13px 20px;
+            padding: 14px 22px;
 
-            border: 4px solid #000;
+            border: 4px solid black;
 
-            box-shadow: 5px 5px 0 #000;
+            box-shadow: 6px 6px 0 black;
 
             text-decoration: none;
 
-            color: #000;
+            color: black;
 
             font-weight: 1000;
-
-            background: #fff;
 
             transition:
                 transform .12s ease,
@@ -914,30 +1114,33 @@
         }
 
         .social.youtube {
-
-            background: #ff3030;
+            background: var(--coral);
         }
 
         .social.instagram {
-
-            background: #ff7ad9;
+            background: var(--pink);
         }
 
         .social:hover {
-
             transform:
                 translate(-3px, -3px)
                 rotate(-1deg);
 
             box-shadow:
-                8px 8px 0 #000;
+                9px 9px 0 black;
+        }
+
+        .social:active {
+            transform:
+                translate(4px, 4px);
+
+            box-shadow:
+                2px 2px 0 black;
         }
 
         .social svg {
-
-            width: 23px;
-
-            height: 23px;
+            width: 24px;
+            height: 24px;
 
             fill: currentColor;
         }
@@ -948,22 +1151,44 @@
         ========================================================= */
 
         .requirements {
+            margin-top: 28px;
 
-            margin-top: 25px;
+            padding: 20px;
 
-            padding: 18px;
+            background: white;
 
-            background: #fff;
+            border: 4px solid black;
 
-            border: 3px solid #000;
-
-            box-shadow: 5px 5px 0 #000;
+            box-shadow: 6px 6px 0 black;
 
             font-size: 13px;
 
-            line-height: 1.7;
+            line-height: 1.8;
 
             font-weight: 800;
+
+            position: relative;
+        }
+
+        .requirements::before {
+            content: "INFO";
+
+            position: absolute;
+
+            top: -17px;
+            left: 20px;
+
+            background: var(--teal);
+
+            border: 3px solid black;
+
+            padding: 5px 12px;
+
+            font-size: 11px;
+
+            font-weight: 1000;
+
+            transform: rotate(-2deg);
         }
 
 
@@ -972,12 +1197,11 @@
         ========================================================= */
 
         footer {
+            margin-top: 60px;
 
-            margin-top: 45px;
+            padding-top: 25px;
 
-            padding-top: 22px;
-
-            border-top: 3px solid #000;
+            border-top: 4px solid black;
 
             text-align: center;
 
@@ -987,20 +1211,18 @@
         }
 
         .footer-links {
-
             display: flex;
 
             justify-content: center;
 
-            gap: 20px;
+            gap: 22px;
 
-            margin-top: 10px;
+            margin-top: 12px;
 
             flex-wrap: wrap;
         }
 
         .footer-links a {
-
             font-weight: 1000;
 
             text-decoration: underline;
@@ -1014,85 +1236,74 @@
         @media (max-width: 700px) {
 
             .topbar {
-
                 padding:
                     10px 15px;
             }
 
             .brand {
-
-                font-size: 14px;
+                font-size: 13px;
             }
 
             .version-badge {
+                font-size: 10px;
 
-                font-size: 11px;
-
-                padding: 6px 9px;
+                padding:
+                    6px 9px;
             }
 
             main {
-
                 padding:
-                    18px 15px 45px;
+                    25px 15px 50px;
             }
 
             .hero {
-
                 padding:
-                    5px 5px 15px;
+                    5px 5px 25px;
             }
 
             .logo-wrap {
+                width: 85px;
+                height: 85px;
 
-                width: 82px;
-
-                height: 82px;
-
-                margin-bottom: 18px;
+                margin-bottom: 20px;
             }
 
             .hero-badge {
-
                 font-size: 11px;
 
-                padding: 8px 11px;
+                padding:
+                    8px 11px;
 
-                margin-bottom: 22px;
+                margin-bottom: 23px;
             }
 
             .main-title {
-
                 font-size:
                     clamp(
-                        54px,
+                        52px,
                         17vw,
                         85px
                     );
 
-                letter-spacing:
-                    -4px;
+                letter-spacing: -4px;
 
-                line-height:
-                    .83;
+                line-height: .84;
 
                 text-shadow:
-                    5px 5px 0 #ff00e6;
+                    5px 5px 0 var(--pink);
 
-                margin-bottom: 22px;
+                margin-bottom: 24px;
             }
 
             .description {
-
                 font-size: 16px;
 
-                line-height: 1.45;
+                line-height: 1.5;
 
-                margin-bottom: 22px;
+                margin-bottom: 23px;
             }
 
             .get-tool {
-
                 width: 100%;
 
                 font-size: 18px;
@@ -1101,71 +1312,90 @@
                     14px 18px;
             }
 
+            .downloads {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns:
+                    1fr 1fr;
+
+                gap: 13px;
+            }
+
+            .feature {
+                min-height: 130px;
+
+                padding: 15px;
+            }
+
+            .feature-icon {
+                font-size: 29px;
+            }
+
+            .feature-name {
+                font-size: 14px;
+            }
+
+            .shape.circle {
+                width: 70px;
+                height: 70px;
+
+                left: -25px;
+            }
+
+            .shape.diamond {
+                width: 55px;
+                height: 55px;
+
+                right: -15px;
+            }
+
+            .shape.square {
+                left: -20px;
+
+                width: 55px;
+                height: 55px;
+            }
+
+            .shape.pattern {
+                right: -20px;
+
+                width: 50px;
+                height: 100px;
+            }
+
             .sticker.fire {
+                left: -5px;
 
-                left: -8px;
+                top: 10px;
 
-                top: 5px;
-
-                font-size: 42px;
+                font-size: 40px;
             }
 
             .sticker.star {
+                right: -5px;
 
-                right: -4px;
+                top: 60px;
 
-                top: 55px;
-
-                font-size: 36px;
+                font-size: 35px;
             }
 
             .sticker.eyes {
-
                 left: 0;
 
-                bottom: 75px;
+                bottom: 85px;
 
                 font-size: 30px;
             }
 
             .sticker.disc {
-
                 right: 5px;
 
-                bottom: 65px;
+                bottom: 70px;
 
                 font-size: 30px;
             }
-
-            .downloads {
-
-                grid-template-columns: 1fr;
-            }
-
-            .features {
-
-                grid-template-columns: 1fr 1fr;
-
-                gap: 12px;
-            }
-
-            .feature {
-
-                min-height: 125px;
-
-                padding: 14px;
-            }
-
-            .feature-icon {
-
-                font-size: 28px;
-            }
-
-            .feature-name {
-
-                font-size: 14px;
-            }
-
         }
 
 
@@ -1176,52 +1406,89 @@
         @media (max-width: 430px) {
 
             .brand-mark {
-
-                width: 16px;
-
-                height: 16px;
+                width: 17px;
+                height: 17px;
             }
 
             .brand {
-
-                font-size: 12px;
+                font-size: 11px;
 
                 gap: 8px;
             }
 
             .version-badge {
-
                 font-size: 9px;
 
                 border-width: 2px;
 
-                box-shadow: 3px 3px 0 #000;
+                box-shadow:
+                    3px 3px 0 black;
             }
 
             .main-title {
-
                 font-size: 55px;
 
-                letter-spacing:
-                    -3px;
+                letter-spacing: -3px;
             }
 
             .features {
-
                 grid-template-columns: 1fr;
             }
 
             .social {
-
                 width: 100%;
+            }
+
+            .download-card {
+                padding: 20px;
+            }
+
+            .pattern-block {
+                padding: 15px;
+            }
+
+            .pattern-inner {
+                padding: 18px;
+
+                font-size: 17px;
             }
         }
 
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+
+                scroll-behavior: auto !important;
+
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 
 
 <body>
+
+    <!-- =========================================================
+         BACKGROUND MEMPHIS SHAPES
+    ========================================================== -->
+
+    <div class="shape circle"></div>
+
+    <div class="shape diamond"></div>
+
+    <div class="shape square"></div>
+
+    <div class="shape pattern"></div>
 
 
     <!-- =========================================================
@@ -1256,25 +1523,21 @@
         <div class="marquee-track">
 
             <div class="marquee-content">
-
                 ⚡ HUMBLE STUDIO TOOL
                 • ADOBE WORKFLOW
                 • DISCORD RICH PRESENCE
                 • STREAKS
                 • COMMUNITY RANKING
                 • ⚡
-
             </div>
 
             <div class="marquee-content">
-
                 ⚡ HUMBLE STUDIO TOOL
                 • ADOBE WORKFLOW
                 • DISCORD RICH PRESENCE
                 • STREAKS
                 • COMMUNITY RANKING
                 • ⚡
-
             </div>
 
         </div>
@@ -1375,7 +1638,6 @@
         </section>
 
 
-
         <!-- =====================================================
              DOWNLOAD SECTION
         ====================================================== -->
@@ -1432,15 +1694,20 @@
                 </div>
 
 
+                <!-- REQUIREMENTS -->
+
                 <div class="requirements">
 
                     <strong>REQUIREMENTS</strong>
+
                     <br><br>
 
                     🎬 Adobe After Effects / Premiere Pro
+
                     <br>
 
                     💻 Windows 10/11 or macOS
+
                     <br>
 
                     💬 Discord Desktop required
@@ -1450,7 +1717,6 @@
             </div>
 
         </section>
-
 
 
         <!-- =====================================================
@@ -1526,7 +1792,7 @@
                     </div>
 
                     <div class="feature-name">
-                        AE / Premiere Detection
+                        Adobe App Detection
                     </div>
 
                 </div>
@@ -1549,6 +1815,25 @@
 
         </section>
 
+
+        <!-- =====================================================
+             MEMPHIS PATTERN SECTION
+        ====================================================== -->
+
+        <section class="pattern-block">
+
+            <div class="pattern-inner">
+
+                🎬
+                EDIT.
+                TRACK.
+                FLEX.
+                REPEAT.
+                🔥
+
+            </div>
+
+        </section>
 
 
         <!-- =====================================================
@@ -1622,7 +1907,6 @@
         </section>
 
 
-
         <!-- =====================================================
              FOOTER
         ====================================================== -->
@@ -1663,7 +1947,6 @@
 
 
     </main>
-
 
 </body>
 </html>
