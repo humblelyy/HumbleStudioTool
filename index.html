@@ -342,6 +342,29 @@ a {
     padding-right: 20px;
 }
 
+/* HUMBLE wordmark inside the scrolling marquee */
+.marquee-logo {
+    display: block;
+    flex: 0 0 auto;
+    width: 105px;
+    height: 38px;
+    object-fit: contain;
+    object-position: center;
+    vertical-align: middle;
+    transition: transform 0.25s ease;
+}
+
+.marquee-logo:hover {
+    transform: rotate(-3deg) scale(1.06);
+}
+
+@media (max-width: 600px) {
+    .marquee-logo {
+        width: 82px;
+        height: 30px;
+    }
+}
+
 @keyframes infiniteMarquee {
     from {
         transform: translate3d(0, 0, 0);
@@ -2396,6 +2419,12 @@ footer {
             <span>•</span>
             <span>COMMUNITY RANKING</span>
             <span>•</span>
+            <img
+                class="marquee-logo"
+                src="humble-wordmark.png"
+                alt="Humble"
+            >
+            <span>•</span>
 
         </div>
 
@@ -2410,6 +2439,12 @@ footer {
             <span>STREAKS</span>
             <span>•</span>
             <span>COMMUNITY RANKING</span>
+            <span>•</span>
+            <img
+                class="marquee-logo"
+                src="humble-wordmark.png"
+                alt="Humble"
+            >
             <span>•</span>
 
         </div>
